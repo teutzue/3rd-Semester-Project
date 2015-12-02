@@ -23,7 +23,6 @@ angular.module('myApp.view1', ['ngRoute'])
 //            });
 
             $scope.passengers = 1;
-
             $scope.dataFrom = {
                 repeatSelectFrom: null,
                 origins: []
@@ -34,8 +33,6 @@ angular.module('myApp.view1', ['ngRoute'])
                 {origin: "STN", description: "London (STN)"},
                 {origin: "SXF", description: "Berlin-Schönefeld (SXF)"}
             ];
-
-
             $scope.dataTo = {
                 repeatSelectTo: null,
                 destinations: []
@@ -46,7 +43,9 @@ angular.module('myApp.view1', ['ngRoute'])
                 {destination: "STN", description: "London (STN)"},
                 {destination: "SXF", description: "Berlin-Schönefeld (SXF)"}
             ];
-
+            
+//            $scope.airlines;
+            
             $scope.getData = function () {
 
                 $http({
@@ -60,13 +59,61 @@ angular.module('myApp.view1', ['ngRoute'])
                             + $scope.passengers
 
                 }).then(function successCallback(response) {
-                    $scope.number = response.data;
+//                    $scope.airlines = response.data;
+
+                    $scope.airlines = [
+                        {// First airline
+                            "airline": "First airline",
+                            "flights": [
+                                {
+                                    "flightID": "COL3256",
+                                    "numberOfSeats": 2,
+                                    "date": "2016-01-04T10:00:00.000Z",
+                                    "totalPrice": 130,
+                                    "traveltime": 90,
+                                    "origin": "CPH",
+                                    "destination": "STN"
+                                },
+                                {
+                                    "flightID": "COL3256",
+                                    "numberOfSeats": 2,
+                                    "date": "2016-01-04T19:00:00.000Z",
+                                    "totalPrice": 100,
+                                    "traveltime": 90,
+                                    "origin": "CPH",
+                                    "destination": "STN"
+                                }
+                            ]
+                        }, // End of First
+                        {// second airline
+                            "airline": "second airline",
+                            "flights": [
+                                {
+                                    "flightID": "COL3256",
+                                    "numberOfSeats": 2,
+                                    "date": "2016-01-04T10:00:00.000Z",
+                                    "totalPrice": 130,
+                                    "traveltime": 90,
+                                    "origin": "CPH",
+                                    "destination": "STN"
+                                },
+                                {
+                                    "flightID": "COL3256",
+                                    "numberOfSeats": 2,
+                                    "date": "2016-01-04T19:00:00.000Z",
+                                    "totalPrice": 100,
+                                    "traveltime": 90,
+                                    "origin": "CPH",
+                                    "destination": "STN"
+                                }
+                            ]
+                        } // End of Second airline
+                    ]; // End of airlines
 
                 }, function errorCallback(response) {
                     alert("Error occured");
                 });
             };
-
         }); // End of Controller
 
 

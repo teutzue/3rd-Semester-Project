@@ -14,17 +14,35 @@
     <label>Departure Date:
         <input type="date" class="form-control" ng-model="dDate">
     </label>
-<!--    <label>Return Date:
-        <input type="date" class="form-control" ng-model="fDate">
-    </label>-->
+    <!--    <label>Return Date:
+            <input type="date" class="form-control" ng-model="fDate">
+        </label>-->
     <label>Passengers:
         <input type="number" ng-model="passengers" id="amount" class="form-control" min="1" placeholder="number">
     </label>
     <button class="btn btn-success" ng-click="getData()()">
-    <span class="glyphicon  glyphicon-cog"></span>Search
+        <span class="glyphicon  glyphicon-cog"></span>Search
     </button>
 </fieldset>
 
+
+<table border="1">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="airline in airlines">
+            <td>{{airline.airline}}</td>
+            <td ng-repeat="flight in airline.flights">
+                {{flight.flightID}}
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
 
 
 
