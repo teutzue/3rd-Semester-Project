@@ -48,7 +48,7 @@ angular.module('myApp.view1', ['ngRoute'])
             ];
 
             $scope.dDate;
-            $scope.fDate;
+//            $scope.fDate;
             $scope.getData = function () {
                 
                
