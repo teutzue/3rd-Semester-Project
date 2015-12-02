@@ -1,10 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ApiReader;
-
-
-import java.util.concurrent.Callable;
-
-
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,8 +53,8 @@ import java.util.concurrent.Future;
                 String outputline="";
 		System.out.println("Output from Server .... \n");
 		while ((outputline = br.readLine()) != null) {
-			System.out.println(outputline);
-                        output = outputline+'\n';
+//			System.out.println(outputline);
+                        output += outputline;
 		}
 		conn.disconnect();
 	  } catch (MalformedURLException e) {
@@ -71,8 +70,8 @@ import java.util.concurrent.Future;
          public class DisplayData{
      public String returnJsonStringAirlineInfo(int threadcount) throws InterruptedException, ExecutionException{
         List<String> urls = new ArrayList<String>();
-        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-04T23:00:00.000Z/3");
-          urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-04T23:00:00.000Z/2");
+        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CDG/2016-01-16T00:00:00.000Z/3");
+          urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CDG/2016-01-16T00:00:00.000Z/3");
 
           
           
@@ -86,16 +85,17 @@ import java.util.concurrent.Future;
             listwithFutures.add(executor.submit(task));
         }
 
-        executor.shutdown();
+     executor.shutdown();
      String stringconcat="";
         
         for (Future<String> list1 : listwithFutures) {
    
             stringconcat += list1.get();
         }
+        stringconcat='['+stringconcat+']';
         
         
-//        System.out.println("Number of primes: " + stringconcat);
+//       System.out.println(stringconcat);
         return stringconcat;
     }
 
@@ -108,12 +108,14 @@ import java.util.concurrent.Future;
       
         
         
-       for (int i = 0; i <20; i++) {
+//       for (int i = 0; i <20; i++) {
            
-        new DisplayData().returnJsonStringAirlineInfo(2);
-       }
+      String string =  new DisplayData().returnJsonStringAirlineInfo(10);   
+       System.out.println(string);
+//   }
 
 //        System.out.println("Duration: " + duration / 1_000_000 + " milliseconds");
 
     }
  }
+    
