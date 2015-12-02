@@ -10,7 +10,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 });
             }])
 
-        .controller('View1Ctrl', function ($http, $scope) {
+        .controller('View1Ctrl', function ($http, $scope, dateFilter) {
 
 //            $http({
 //                method: 'GET',
@@ -47,19 +47,17 @@ angular.module('myApp.view1', ['ngRoute'])
                 {destination: "SXF", description: "Berlin-Schönefeld (SXF)"}
             ];
 
-            $scope.dDate;
-            $scope.fDate;
             $scope.getData = function () {
-                
-               
+
                 $http({
                     method: 'GET',
                     url: 'api/flightinfo/'
-                                + $scope.dataFrom.repeatSelectFrom + '/'
-                                + $scope.dataTo.repeatSelectTo + '/'
-                                + $scope.dDate + '/'
+                            + $scope.dataFrom.repeatSelectFrom + '/'
+                            + $scope.dataTo.repeatSelectTo + '/'
+                            + $scope.dDate.toISOString() + '/'
+//                                + $scope.dDate + '/'
 //                                + $scope.fDate + '/'
-                                + $scope.passengers
+                            + $scope.passengers
 
                 }).then(function successCallback(response) {
                     $scope.number = response.data;
