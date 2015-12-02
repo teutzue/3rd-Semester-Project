@@ -1,4 +1,60 @@
-<style>h2 {color: darkblue;}</style>
+<fieldset class="form-group"><br /><br />
+    <label>From:
+        <select class="form-control" name="repeatSelectFrom" id="repeatSelectFrom" ng-model="dataFrom.repeatSelectFrom">
+            <option value="" disabled selected hidden>Please Choose</option>
+            <option ng-repeat="from in dataFrom.origins" id="from" value="{{from.origin}}">{{from.description}}</option>
+        </select>
+    </label>
+    <label>To:
+        <select class="form-control" name="repeatSelectTo" id="repeatSelectTo" ng-model="dataTo.repeatSelectTo">
+            <option value="" disabled selected hidden>Please Choose</option>
+            <option ng-repeat="to in dataTo.destinations" id="to" value="{{to.destination}}">{{to.description}}</option>
+        </select>
+    </label>
+    <label>Departure Date:
+        <input type="date" class="form-control" ng-model="dDate">
+    </label>
+    <label>Return Date:
+        <input type="date" class="form-control" ng-model="fDate">
+    </label>
+    <label>Passengers:
+        <input type="number" ng-model="passengers" id="amount" class="form-control" min="1" placeholder="number">
+    </label>
+    <button class="btn btn-success" ng-click="getData()()">
+    <span class="glyphicon  glyphicon-cog"></span>Search
+    </button>
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<style>h2 {color: darkblue;}</style>
 <p style="margin-top: 10px;color:#105cb6;font-style: italic; font-size: large">This seed shows a "typical" layout for an application that requires authentication and uses
   <b>ROLES</b> to distinguish between what authenticated users can do.</p>
 <ul>
@@ -23,4 +79,4 @@
 </div>
 
 
-<h3 style="color: darkred;"><em>Important: This seed is NOT meant for Real Life Projects.</em></h3>
+<h3 style="color: darkred;"><em>Important: This seed is NOT meant for Real Life Projects.</em></h3>-->
