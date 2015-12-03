@@ -7,10 +7,14 @@ package ApiReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -18,6 +22,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+//import net.minidev.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -30,48 +37,69 @@ import java.util.concurrent.Future;
     public GetAirlineInfo(String url) {
         this.url = url;
     }
+    
+    
+      private static String readAll(Reader rd) throws IOException {
+    StringBuilder sb = new StringBuilder();
+    int cp;
+    while ((cp = rd.read()) != -1) {
+      sb.append((char) cp);
+    }
+    return sb.toString();
+  }
 
     @Override
-    public synchronized String call() throws Exception {
+    public  String call() throws Exception {
             return resultString(url);
     }
     
-           private  String resultString(String url) {
+           private  String resultString(String url) throws MalformedURLException, IOException {
        
-		String output="";
-               	  try {
-		URL url4e = new URL(url);
-		HttpURLConnection conn = (HttpURLConnection) url4e.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Accept", "application/json");
-		if (conn.getResponseCode() != 200) {
-			throw new RuntimeException("Failed : HTTP error code : "
-					+ conn.getResponseCode());
-		}
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-			(conn.getInputStream())));
-                String outputline="";
-		System.out.println("Output from Server .... \n");
-		while ((outputline = br.readLine()) != null) {
-//			System.out.println(outputline);
-                        output += outputline;
-		}
-		conn.disconnect();
-	  } catch (MalformedURLException e) {
-		e.printStackTrace();
-	  } catch (IOException e) {
-		e.printStackTrace();
-	  }
-        return output;
+//		String output="";
+//               	  try {
+//		URL url4e = new URL(url);
+//		HttpURLConnection conn = (HttpURLConnection) url4e.openConnection();
+//		conn.setRequestMethod("GET");
+//		conn.setRequestProperty("Accept", "application/json");
+//		if (conn.getResponseCode() != 200) {
+//			throw new RuntimeException("Failed : HTTP error code : "
+//					+ conn.getResponseCode());
+//		}
+//		BufferedReader br = new BufferedReader(new InputStreamReader(
+//			(conn.getInputStream())));
+//                String outputline="";
+//		System.out.println("Output from Server .... \n");
+//		while ((outputline = br.readLine()) != null) {
+////			System.out.println(outputline);
+//                        output += outputline;
+//		}
+//		conn.disconnect();
+//	  } catch (MalformedURLException e) {
+//		e.printStackTrace();
+//	  } catch (IOException e) {
+//		e.printStackTrace();
+//	  }
+               
+             InputStream is = new URL(url).openStream();
+    try {
+      BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+      String jsonText = readAll(rd);
+      return jsonText;
+    } finally {
+      is.close();
+    }  
+//        return output;//return Json
 	}
  }
 
 
          public class DisplayData{
-     public String returnJsonStringAirlineInfo(int threadcount) throws InterruptedException, ExecutionException{
+     public List<JSONObject> returnJsonStringAirlineInfo(int threadcount) throws InterruptedException, ExecutionException, JSONException{
+         List<JSONObject> listJSON = new ArrayList<JSONObject>();
+         
         List<String> urls = new ArrayList<String>();
-        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CDG/2016-01-16T00:00:00.000Z/3");
-          urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CDG/2016-01-16T00:00:00.000Z/3");
+       urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-15T00:00:00.000Z/3");
+          urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/BCN/CPH/2016-01-16T00:00:00.000Z/2");
 
           
           
@@ -90,13 +118,27 @@ import java.util.concurrent.Future;
         
         for (Future<String> list1 : listwithFutures) {
    
-            stringconcat += list1.get();
+      org.json.JSONObject json = new org.json.JSONObject(list1.get());
+      listJSON.add(json);
+//            stringconcat += list1.get();
         }
-        stringconcat='['+stringconcat+']';
-        
+//         for (int i = 0; i < listwithFutures.size(); i++) {
+//           stringconcat="[";
+//           if(i>0)
+//           {
+//               stringconcat+=",";
+//           }
+//             if(listwithFutures.get(i)!=null)
+//             {
+//                 stringconcat+=listwithFutures.get(i);
+////                 stringconcat+=",";
+//             }
+//         }
+//       // stringconcat='['+stringconcat+']';
+//        stringconcat+="]";
         
 //       System.out.println(stringconcat);
-        return stringconcat;
+        return listJSON;
     }
 
     public DisplayData(String...args) {
@@ -104,14 +146,16 @@ import java.util.concurrent.Future;
     }
 
    
-   public static void main(String[] args) throws InterruptedException, ExecutionException {
+   public static void main(String[] args) throws InterruptedException, ExecutionException, JSONException {
       
         
         
 //       for (int i = 0; i <20; i++) {
            
-      String string =  new DisplayData().returnJsonStringAirlineInfo(10);   
-       System.out.println(string);
+         List<JSONObject> obj =  new DisplayData().returnJsonStringAirlineInfo(10);   
+       for (int i = 0; i < obj.size(); i++) {
+              System.out.println(obj.get(i).toString());
+          }
 //   }
 
 //        System.out.println("Duration: " + duration / 1_000_000 + " milliseconds");
