@@ -30,31 +30,30 @@ import org.json.JSONObject;
  *
  * @author Yoana
  */
- class GetAirlineInfo  implements Callable<String>
-{
+class GetAirlineInfo implements Callable<String> {
+
     String url;
 
     public GetAirlineInfo(String url) {
         this.url = url;
     }
-    
-    
-      private static String readAll(Reader rd) throws IOException {
-    StringBuilder sb = new StringBuilder();
-    int cp;
-    while ((cp = rd.read()) != -1) {
-      sb.append((char) cp);
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
     }
-    return sb.toString();
-  }
 
     @Override
-    public  String call() throws Exception {
-            return resultString(url);
+    public String call() throws Exception {
+        return resultString(url);
     }
-    
-           private  String resultString(String url) throws MalformedURLException, IOException {
-       
+
+    private String resultString(String url) throws MalformedURLException, IOException {
+
 //		String output="";
 //               	  try {
 //		URL url4e = new URL(url);
@@ -79,47 +78,43 @@ import org.json.JSONObject;
 //	  } catch (IOException e) {
 //		e.printStackTrace();
 //	  }
-               
-             InputStream is = new URL(url).openStream();
-    try {
-      BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-      String jsonText = readAll(rd);
-      return jsonText;
-    } finally {
-      is.close();
-    }  
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            return jsonText;
+        } finally {
+            is.close();
+        }
 //        return output;//return Json
-	}
- }
+    }
+}
 
+public class DisplayData {
 
-         public class DisplayData{
-     public List<JSONObject> returnJsonStringAirlineInfo(int threadcount) throws InterruptedException, ExecutionException, JSONException{
-         List<JSONObject> listJSON = new ArrayList<JSONObject>();
-         
+    public List<JSONObject> returnJsonStringAirlineInfo(int threadcount) throws InterruptedException, ExecutionException, JSONException {
+        List<JSONObject> listJSON = new ArrayList<JSONObject>();
+
         List<String> urls = new ArrayList<String>();
-       urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-15T00:00:00.000Z/3");
-          urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/BCN/CPH/2016-01-16T00:00:00.000Z/2");
+        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-15T00:00:00.000Z/3");
+        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/BCN/CPH/2016-01-16T00:00:00.000Z/2");
 
-          
-          
-          
         List<Future<String>> listwithFutures = new ArrayList<>();
         ExecutorService executor = Executors.newFixedThreadPool(threadcount);
 
         for (int i = 0; i < urls.size(); i++) {
- 
-            Callable<String> task = new GetAirlineInfo(urls.get(i));  
+
+            Callable<String> task = new GetAirlineInfo(urls.get(i));
             listwithFutures.add(executor.submit(task));
         }
 
-     executor.shutdown();
-     String stringconcat="";
-        
+        executor.shutdown();
+        String stringconcat = "";
+
         for (Future<String> list1 : listwithFutures) {
-   
-      org.json.JSONObject json = new org.json.JSONObject(list1.get());
-      listJSON.add(json);
+
+            org.json.JSONObject json = new org.json.JSONObject(list1.get());
+            listJSON.add(json);
 //            stringconcat += list1.get();
         }
 //         for (int i = 0; i < listwithFutures.size(); i++) {
@@ -136,30 +131,24 @@ import org.json.JSONObject;
 //         }
 //       // stringconcat='['+stringconcat+']';
 //        stringconcat+="]";
-        
+
 //       System.out.println(stringconcat);
         return listJSON;
     }
 
-    public DisplayData(String...args) {
-        
+    public DisplayData(String... args) {
+
     }
 
-   
-   public static void main(String[] args) throws InterruptedException, ExecutionException, JSONException {
-      
-        
-        
+    public static void main(String[] args) throws InterruptedException, ExecutionException, JSONException {
+
 //       for (int i = 0; i <20; i++) {
-           
-         List<JSONObject> obj =  new DisplayData().returnJsonStringAirlineInfo(10);   
-       for (int i = 0; i < obj.size(); i++) {
-              System.out.println(obj.get(i).toString());
-          }
+        List<JSONObject> obj = new DisplayData().returnJsonStringAirlineInfo(10);
+        for (int i = 0; i < obj.size(); i++) {
+            System.out.println(obj.get(i).toString());
+        }
 //   }
 
 //        System.out.println("Duration: " + duration / 1_000_000 + " milliseconds");
-
     }
- }
-    
+}

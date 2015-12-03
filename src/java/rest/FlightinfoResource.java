@@ -1,23 +1,14 @@
 package rest;
 
-
 import ApiReader.DisplayData;
-import ApiReader.GetTheAirlineInfo;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
-import javax.ws.rs.core.MediaType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +22,7 @@ public class FlightinfoResource {
 
 //    private GetTheAirlineInfo get = new GetTheAirlineInfo();
     DisplayData data = new DisplayData();
-    
+
     @Context
     private UriInfo context;
 
@@ -70,41 +61,32 @@ public class FlightinfoResource {
 //        
 //        return "";
 //    } // End of Get
-    
-     @GET
+    @GET
     @Path("info")
     @Produces("application/json")
-    public String getJson() throws InterruptedException, ExecutionException, JSONException
-    {
-   
-        
-        
+    public String getJson() throws InterruptedException, ExecutionException, JSONException {
+
         Gson gson = new Gson();
-      List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
+        List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
         String output = "";
-        if(list.size()>1)
-        { 
-            output+="[";
-            output +=list.get(0).toString()+",";
-               for (int i = 1; i < list.size(); i++) {
-             output +=list.get(i).toString();
+        if (list.size() > 1) {
+            output += "[";
+            output += list.get(0).toString() + ",";
+            for (int i = 1; i < list.size(); i++) {
+                output += list.get(i).toString();
+            }
+            output += "]";
+        } else {
+
+            for (int i = 0; i < list.size(); i++) {
+
+                output += list.get(i).toString();
+            }
         }
-               output+="]";
-        }else
-        {
-            
-            
-        for (int i = 0; i < list.size(); i++) {
-            
-            output +=list.get(i).toString();
-        }
-        }
-        
-       
+
         System.out.println(output);
         return output;
-        
-        
+
 //        JsonArray jsonArray = new JsonArray();
 //        for (Person p : people) 
 //        {
@@ -161,6 +143,5 @@ public class FlightinfoResource {
 //        return gson.toJson(stringinfo);
     }
 //
-    
-    
+
 } // End of Class
