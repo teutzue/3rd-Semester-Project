@@ -38,7 +38,7 @@
             </tr>
         </thead>
         <tbody ng-repeat="airline in airlines">
-            <tr ng-repeat="flight in airline.flights">
+            <tr id="{{$index}}" ng-repeat="flight in airline.flights">
                 <td>{{airline.airline}}</td>
                 <td>{{flight.flightID}}</td>
                 <td>{{flight.numberOfSeats}}</td>
@@ -46,6 +46,9 @@
                 <td>{{flight.totalPrice}}</td>
                 <td>{{flight.origin}}</td>
                 <td>{{flight.destination}}</td>
+                <td>
+                    <a href="" ng-click="bookTicket($index)">Book Ticket</a>
+                </td>
             </tr>
         </tbody>
     </table>
