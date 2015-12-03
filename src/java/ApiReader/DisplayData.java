@@ -78,6 +78,9 @@ class GetAirlineInfo implements Callable<String> {
 //	  } catch (IOException e) {
 //		e.printStackTrace();
 //	  }
+        
+        
+        //if contains the string airline otherwise throw exception 
         InputStream is = new URL(url).openStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));

@@ -56,7 +56,7 @@ public class FlightinfoResource {
 //        return "";
 //    } // End of Get
     @GET
-    @Path("info/{from}/{to}/{date}/{numTickets}")
+    @Path("/{from}/{to}/{date}/{numTickets}")
     @Produces("application/json")
     public String getJson(
            @PathParam("from") String from,
