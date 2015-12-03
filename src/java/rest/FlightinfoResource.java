@@ -9,6 +9,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,20 +30,13 @@ public class FlightinfoResource {
     public FlightinfoResource() {
     }
 
-//    @GET
-//    @Path("/{from}/{date}/{numTickets}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String getFrom(
-//            @PathParam("from") String dDate,
-//            @PathParam("from") String fDate,
-//    
-//    ) {
-//    
-//        
-//    } // End of Get
+
+    
+        
+    // End of Get
 //    @GET
 //    @Path("/{from}/{to}/{date}/{numTickets}")
-//    @Produces(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON){
 //    public String getFromTo(
 //            @PathParam("from") String from,
 //            @PathParam("to") String to,
@@ -62,11 +56,19 @@ public class FlightinfoResource {
 //        return "";
 //    } // End of Get
     @GET
-    @Path("info")
+    @Path("info/{from}/{to}/{date}/{numTickets}")
     @Produces("application/json")
-    public String getJson() throws InterruptedException, ExecutionException, JSONException {
+    public String getJson(
+           @PathParam("from") String from,
+           @PathParam("to") String to,
+            @PathParam("date") String date,
+            @PathParam("numTickets") int passengernumber
+                              ) throws InterruptedException, ExecutionException, JSONException {
 
+        
+        System.out.println(date);
         Gson gson = new Gson();
+        data.addUrls(from, to, date, passengernumber);
         List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
         String output = "";
         if (list.size() > 1) {
@@ -77,11 +79,12 @@ public class FlightinfoResource {
             }
             output += "]";
         } else {
-
+   output += "[";
             for (int i = 0; i < list.size(); i++) {
 
                 output += list.get(i).toString();
             }
+  output += "]";
         }
 
         System.out.println(output);

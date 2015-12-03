@@ -92,12 +92,19 @@ class GetAirlineInfo implements Callable<String> {
 
 public class DisplayData {
 
+       private List<String> urls = new ArrayList<String>();
+                public void addUrls(String from,String to,String date,int passengernumber)
+             {
+                 String varPath = "http://angularairline-plaul.rhcloud.com/api/flightinfo/"+from+"/"+to+"/"+date+"/"+passengernumber;
+                 urls.add(varPath);
+             }
+
+    
     public List<JSONObject> returnJsonStringAirlineInfo(int threadcount) throws InterruptedException, ExecutionException, JSONException {
         List<JSONObject> listJSON = new ArrayList<JSONObject>();
 
-        List<String> urls = new ArrayList<String>();
-        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-15T00:00:00.000Z/3");
-        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/BCN/CPH/2016-01-16T00:00:00.000Z/2");
+//        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-15T00:00:00.000Z/3");
+//        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/BCN/CPH/2016-01-16T00:00:00.000Z/2");
 
         List<Future<String>> listwithFutures = new ArrayList<>();
         ExecutorService executor = Executors.newFixedThreadPool(threadcount);
