@@ -43,21 +43,28 @@ angular.module('myApp.view1', ['ngRoute'])
                 {destination: "STN", description: "London (STN)"},
                 {destination: "SXF", description: "Berlin-Schönefeld (SXF)"}
             ];
-            
+
 //            $scope.airlines;
-            
+
             $scope.getData = function () {
+
+                var year = $scope.dDate.getFullYear();
+                var month = $scope.dDate.getMonth();
+                var day = $scope.dDate.getDate();
+                $scope.date = new Date(year, month, day, 1);
+
 
                 $http({
                     method: 'GET',
                     url: 'api/flightinfo/'
                             + $scope.dataFrom.repeatSelectFrom + '/'
                             + $scope.dataTo.repeatSelectTo + '/'
-                            + $scope.dDate.toISOString() + '/'
+                            + $scope.date.toISOString() + '/'
+//                            + $scope.dDate.toISOString() + '/'
                             + $scope.passengers
 
                 }).then(function successCallback(response) {
-                   $scope.airlines = response.data;
+                    $scope.airlines = response.data;
 
                 }, function errorCallback(response) {
                     alert("Error occured");

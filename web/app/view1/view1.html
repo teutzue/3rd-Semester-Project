@@ -35,6 +35,7 @@
                 <th>Total Price</th>
                 <th>Departure</th>
                 <th>Destination</th>
+                <th>Book Tickets</th>
             </tr>
         </thead>
         <tbody ng-repeat="airline in airlines">
@@ -42,7 +43,7 @@
                 <td>{{airline.airline}}</td>
                 <td>{{flight.flightID}}</td>
                 <td>{{flight.numberOfSeats}}</td>
-                <td>{{flight.date}}</td>
+                <td>{{flight.date | date}}</td>
                 <td>{{flight.totalPrice}}</td>
                 <td>{{flight.origin}}</td>
                 <td>{{flight.destination}}</td>
