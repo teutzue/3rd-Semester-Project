@@ -41,7 +41,8 @@ angular.module('myApp.view1', ['ngRoute'])
             $scope.dataTo.destinations = [
                 {destination: "CPH", description: "Copenhagen (CPH)"},
                 {destination: "STN", description: "London (STN)"},
-                {destination: "SXF", description: "Berlin-Schönefeld (SXF)"}
+                {destination: "SXF", description: "Berlin-Schönefeld (SXF)"},
+                {destination: "OSL", description: "Oslo (SXF)"}
             ];
 
 //            $scope.airlines;

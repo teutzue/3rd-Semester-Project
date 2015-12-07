@@ -101,5 +101,23 @@ angular.module('myApp.view5_create_new_account', ['ngRoute'])
                 }
                 return true;
             };
+            //-----------------------------------------------
+            var checkFirstName = function (firstName) {
+
+                if ((angular.isUndefined(firstName)) | (firstName === "")) {
+                    $scope.feetbackError = "Missing First Name!";
+                    return false;
+                }
+                return true;
+            };
+            
+            var checkLastName = function (lastName) {
+
+                if ((angular.isUndefined(lastName)) | (lastName === "")) {
+                    $scope.feetbackError = "Missing Last Name";
+                    return false;
+                }
+                return true;
+            };
 
         }); // End of controller

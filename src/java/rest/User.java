@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("demouser")
-@RolesAllowed("User")
+//@RolesAllowed("User")
 public class User {
     private final UserFacade facade = new UserFacade();
     private static Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
