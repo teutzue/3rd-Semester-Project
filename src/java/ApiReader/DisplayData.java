@@ -24,6 +24,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import net.minidev.json.JSONObject;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,6 +100,10 @@ class GetAirlineInfo implements Callable<String> {
             }
 
         } catch (UnknownHostException e) {
+            
+            //Figure our how to report this
+        }catch (IOException  e) {
+            
             //Figure our how to report this
         }
 
@@ -109,7 +117,7 @@ public class DisplayData {
     private List<String> urls = new ArrayList<String>();
 
     public void addUrls(String from, String to, String date, int passengernumber) {
-        String varPath = "http://angularairline-plaul.rhcloud.com/api/flightinfo/" + from + "/" + to + "/" + date + "/" + passengernumber;
+        String varPath = "http://angularairline-plaul.rcloud.com/api/flightinfo/" + from + "/" + to + "/" + date + "/" + passengernumber;
         urls.add(varPath);
         String ourAirline = "http://sargardon-001-site1.atempurl.com/api/flightinfo/" + from + "/" + to + "/" + date + "/" + passengernumber;
         urls.add(ourAirline);
@@ -134,10 +142,17 @@ public class DisplayData {
 
         for (Future<String> list1 : listwithFutures) {
 
-            org.json.JSONObject json = new org.json.JSONObject(list1.get());
-            if (!json.has("httpError")) {
+            org.json.JSONObject json;
+            try {
+                json = new org.json.JSONObject(list1.get(2, TimeUnit.SECONDS));
+                  if (!json.has("httpError")) {
                 listJSON.add(json);
             }
+                
+            } catch (TimeoutException ex) {
+                Logger.getLogger(DisplayData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
             //listJSON.add(json);
 //            stringconcat += list1.get();
         }

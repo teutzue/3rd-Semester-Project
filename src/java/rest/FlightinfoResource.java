@@ -30,9 +30,6 @@ public class FlightinfoResource {
     public FlightinfoResource() {
     }
 
-
-    
-        
     // End of Get
 //    @GET
 //    @Path("/{from}/{to}/{date}/{numTickets}")
@@ -59,17 +56,17 @@ public class FlightinfoResource {
     @Path("/{from}/{to}/{date}/{numTickets}")
     @Produces("application/json")
     public String getJson(
-           @PathParam("from") String from,
-           @PathParam("to") String to,
+            @PathParam("from") String from,
+            @PathParam("to") String to,
             @PathParam("date") String date,
             @PathParam("numTickets") int passengernumber
-                              ) throws InterruptedException, ExecutionException, JSONException {
+    ) throws InterruptedException, ExecutionException, JSONException {
 
-        
         System.out.println(date);
         Gson gson = new Gson();
         data.addUrls(from, to, date, passengernumber);
         List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
+
         String output = "";
         if (list.size() > 1) {
             output += "[";
@@ -79,12 +76,12 @@ public class FlightinfoResource {
             }
             output += "]";
         } else {
-   output += "[";
+            output += "[";
             for (int i = 0; i < list.size(); i++) {
 
                 output += list.get(i).toString();
             }
-  output += "]";
+            output += "]";
         }
 
         System.out.println(output);
