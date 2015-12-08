@@ -20,9 +20,17 @@ angular.module('myApp.view5_create_new_account', ['ngRoute'])
 
                     var credential = JSON.stringify({
                         username: $scope.userName,
-                        password: $scope.password
+                        password: $scope.password,
+                        firstName: $scope.firstName,
+                        lastName: $scope.lastName,
+                        email: $scope.email,
+                        address: $scope.address,
+                        city: $scope.city,
+                        country: $scope.country,
+                        zipCode: $scope.zipCode,
+                        phone: $scope.phone
                     });
-
+                    console.log(credential);
                     var req = {
                         method: 'POST',
                         url: 'api/demouser',
@@ -37,6 +45,14 @@ angular.module('myApp.view5_create_new_account', ['ngRoute'])
                             $scope.userName = "";
                             $scope.password = "";
                             $scope.password2 = "";
+                            $scope.firstName = "";
+                            $scope.lastName="";
+                            $scope.email="";
+                            $scope.address="";
+                            $scope.city="";
+                            $scope.country="";
+                            $scope.zipCode="";
+                            $scope.phone="";
                             $scope.isSaved = response.data.isSaved;
                             $scope.feetback = response.data.message;
                         } else {
@@ -102,22 +118,22 @@ angular.module('myApp.view5_create_new_account', ['ngRoute'])
                 return true;
             };
             //-----------------------------------------------
-            var checkFirstName = function (firstName) {
-
-                if ((angular.isUndefined(firstName)) | (firstName === "")) {
-                    $scope.feetbackError = "Missing First Name!";
-                    return false;
-                }
-                return true;
-            };
-            
-            var checkLastName = function (lastName) {
-
-                if ((angular.isUndefined(lastName)) | (lastName === "")) {
-                    $scope.feetbackError = "Missing Last Name";
-                    return false;
-                }
-                return true;
-            };
+//            var checkFirstName = function (firstName) {
+//
+//                if ((angular.isUndefined(firstName)) | (firstName === "")) {
+//                    $scope.feetbackError = "Missing First Name!";
+//                    return false;
+//                }
+//                return true;
+//            };
+//
+//            var checkLastName = function (lastName) {
+//
+//                if ((angular.isUndefined(lastName)) | (lastName === "")) {
+//                    $scope.feetbackError = "Missing Last Name";
+//                    return false;
+//                }
+//                return true;
+//            };
 
         }); // End of controller

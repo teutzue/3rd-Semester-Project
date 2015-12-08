@@ -32,6 +32,7 @@ public class DeploymentConfiguration implements ServletContextListener {
     try {
       ServletContext context = sce.getServletContext();
       EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
+      Persistence.generateSchema(DeploymentConfiguration.PU_NAME, null);
       EntityManager em = emf.createEntityManager();
       
       //This flag is set in Web.xml -- Make sure to disable for a REAL system
@@ -46,10 +47,10 @@ public class DeploymentConfiguration implements ServletContextListener {
       url1.setUrl("http://angularairline-plaul.rhcloud.com/api/flightinfo/");
       Url url2 = new Url();
       url2.setUrl("http://sargardon-001-site1.atempurl.com/api/flightinfo/");
-
-      User user = new User("user", PasswordHash.createHash("test"));
-      User admin = new User("admin", PasswordHash.createHash("test"));
-      User both = new User("user_admin", PasswordHash.createHash("test"));
+      //  String email, String address, String city, String country, String zipCode, int phone)
+      User user = new User(PasswordHash.createHash("test"),"user","Bo","Vilstrup","bo@yahoo.com","adress 200","Kongens Lyngby","Danmark",2800,72952797);
+      User admin = new User(PasswordHash.createHash("test"),"admin","Bo","Vilstrup","bo@yahoo.com","adress 200","Kongens Lyngby","Danmark",2800,72952797);
+      User both = new User(PasswordHash.createHash("test"),"user_admin","Bo","Vilstrup","bo@yahoo.com","adress 200","Kongens Lyngby","Danmark",2800,72952797);
       user.AddRole(userRole);
       admin.AddRole(adminRole);
       both.AddRole(userRole);

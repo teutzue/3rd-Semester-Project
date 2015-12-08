@@ -36,6 +36,14 @@ public class User {
 
         user.setUserName(joUser.get("username").getAsString());
         user.setPassword(joUser.get("password").getAsString());
+        user.setEmail(joUser.get("email").getAsString());
+        user.setAddress(joUser.get("address").getAsString());
+        user.setCity(joUser.get("city").getAsString());
+        user.setCountry(joUser.get("country").getAsString());
+        user.setZipCode(joUser.get("zipCode").getAsInt());
+        user.setPhone(joUser.get("phone").getAsInt());
+        user.setFirstName(joUser.get("firstName").getAsString());
+        user.setLastName(joUser.get("lastName").getAsString());
         
         user = facade.addUser(user, "User");
 
