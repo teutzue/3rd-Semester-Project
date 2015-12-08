@@ -31,6 +31,7 @@ angular.module('myApp.view1', ['ngRoute'])
             };
             // Dummy data
             $scope.dataFrom.origins = [
+                {origin: "CDG", description: "Paris (CDG)"},
                 {origin: "CPH", description: "Copenhagen (CPH)"},
                 {origin: "STN", description: "London (STN)"},
                 {origin: "SXF", description: "Berlin-Schönefeld (SXF)"}
