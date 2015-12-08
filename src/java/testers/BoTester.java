@@ -18,13 +18,13 @@ public class BoTester {
     
     public static void main(String[] args) {
         
-        //Persistence.generateSchema(DeploymentConfiguration.PU_NAME, null);
-         UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
-         List<String> string = cus.getAllUrl();
-         for (int i = 0; i < string.size(); i++)
-        {
-            System.out.println(string.get(i));    
-        }
+        Persistence.generateSchema(DeploymentConfiguration.PU_NAME, null);
+//         UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
+//         List<String> string = cus.getAllUrl();
+//         for (int i = 0; i < string.size(); i++)
+//        {
+//            System.out.println(string.get(i));    
+//        }
     }
     
     

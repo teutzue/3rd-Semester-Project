@@ -1,8 +1,8 @@
 package deploy;
 
 import entity.Role;
+import entity.Url;
 import entity.User;
-import facades.UserFacade;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
@@ -15,7 +15,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.ws.rs.core.Context;
 import security.PasswordHash;
 
 @WebListener
@@ -43,6 +42,10 @@ public class DeploymentConfiguration implements ServletContextListener {
       }
       Role userRole = new Role("User");
       Role adminRole = new Role("Admin");
+      Url url1 = new Url();
+      url1.setUrl("http://angularairline-plaul.rhcloud.com/api/flightinfo/");
+      Url url2 = new Url();
+      url2.setUrl("http://sargardon-001-site1.atempurl.com/api/flightinfo/");
 
       User user = new User("user", PasswordHash.createHash("test"));
       User admin = new User("admin", PasswordHash.createHash("test"));
@@ -56,7 +59,8 @@ public class DeploymentConfiguration implements ServletContextListener {
         em.getTransaction().begin();
         em.persist(userRole);
         em.persist(adminRole);
-
+        em.persist(url1);
+        em.persist(url2);
         em.persist(user);
         em.persist(admin);
         em.persist(both);

@@ -1,4 +1,3 @@
-
 package entity;
 
 import java.io.Serializable;
@@ -13,10 +12,12 @@ import javax.persistence.Id;
  */
 @Entity
 public class Url implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     public Integer getId() {
         return id;
     }
@@ -24,10 +25,7 @@ public class Url implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
-    
-    
-    
+
     private String url;
 
     public String getUrl() {
@@ -40,12 +38,6 @@ public class Url implements Serializable {
 
     public Url() {
     }
-    
-     
-    
-    
-
-   
 
     @Override
     public String toString() {

@@ -90,6 +90,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
                     }).then(function successCallback(response) {
                         $scope.airlines = response.data;
+                        console.log($scope.airlines);
 
                     }, function errorCallback(response) {
                         alert("Error occured");
