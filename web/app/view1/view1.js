@@ -22,6 +22,8 @@ angular.module('myApp.view1', ['ngRoute'])
 //                $scope.error = res.status + ": " + res.data.statusText;
 //            });
 
+            $scope.showSpinner = false;
+
             $scope.passengers = 1;
             $scope.dataFrom = {
                 repeatSelectFrom: null,
@@ -49,6 +51,8 @@ angular.module('myApp.view1', ['ngRoute'])
 
             $scope.getData = function () {
                 
+                $scope.showSpinner = true;
+                
                 var year = $scope.dDate.getFullYear();
                 var month = $scope.dDate.getMonth();
                 var day = $scope.dDate.getDate();
@@ -69,9 +73,11 @@ angular.module('myApp.view1', ['ngRoute'])
                     }).then(function successCallback(response) {
                         $scope.airlines = response.data;
                         console.log($scope.airlines);
+                        $scope.showSpinner = false;
 
                     }, function errorCallback(response) {
                         alert("Error occured");
+                        $scope.showSpinner = false;
                     });
 
                 } else {
@@ -87,9 +93,11 @@ angular.module('myApp.view1', ['ngRoute'])
                     }).then(function successCallback(response) {
                         $scope.airlines = response.data;
                         console.log($scope.airlines);
+                        $scope.showSpinner = false;
 
                     }, function errorCallback(response) {
                         alert("Error occured");
+                        $scope.showSpinner = false;
                     });
                 };
             };
