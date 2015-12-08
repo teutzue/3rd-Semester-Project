@@ -44,14 +44,6 @@ class GetAirlineInfo implements Callable<String> {
         this.url = url;
     }
 
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
-    }
 
     @Override
     public String call() throws Exception {
@@ -60,14 +52,6 @@ class GetAirlineInfo implements Callable<String> {
 
     private String resultString(String url) throws MalformedURLException, IOException {
 
-//        InputStream is = new URL(url).openStream();
-//        try {
-//            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-//            String jsonText = readAll(rd);
-//            return jsonText;
-//        } finally {
-//            is.close();
-//        }
         String response = "";
         boolean isFirst = true;
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
@@ -108,43 +92,45 @@ class GetAirlineInfo implements Callable<String> {
         }
 
 //       response = response + "]";
+        System.out.println("the response is "+response);
         return response;
     }
 }
 
 public class DisplayData {
 
-    private List<String> urls = new ArrayList<String>();
+        public List<String> urls = new ArrayList<String>();
+    
 
-    public void addUrls(String from, String to, String date, int passengernumber) {
-        String varPath = "http://angularairline-plaul.rcloud.com/api/flightinfo/" + from + "/" + to + "/" + date + "/" + passengernumber;
-        urls.add(varPath);
-        String ourAirline = "http://sargardon-001-site1.atempurl.com/api/flightinfo/" + from + "/" + to + "/" + date + "/" + passengernumber;
-        urls.add(ourAirline);
+    public void addUrls(List<String> url) 
+    {
+        urls=url;
     }
 
     public List<JSONObject> returnJsonStringAirlineInfo(int threadcount) throws InterruptedException, ExecutionException, JSONException {
         List<JSONObject> listJSON = new ArrayList<JSONObject>();
 
-//        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-15T00:00:00.000Z/3");
+//       urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/CPH/2016-01-15T00:00:00.000Z/3");
+//        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/STN/STN/2016-01-22T00:00:00.000Z/2");
 //        urls.add("http://angularairline-plaul.rhcloud.com/api/flightinfo/BCN/CPH/2016-01-16T00:00:00.000Z/2");
         List<Future<String>> listwithFutures = new ArrayList<>();
         ExecutorService executor = Executors.newFixedThreadPool(threadcount);
 
         for (int i = 0; i < urls.size(); i++) {
-
+            System.out.println("urls size "+urls.size());
             Callable<String> task = new GetAirlineInfo(urls.get(i));
             listwithFutures.add(executor.submit(task));
         }
 
         executor.shutdown();
-        String stringconcat = "";
+
 
         for (Future<String> list1 : listwithFutures) {
 
             org.json.JSONObject json;
             try {
-                json = new org.json.JSONObject(list1.get(2, TimeUnit.SECONDS));
+                json = new org.json.JSONObject(list1.get(10, TimeUnit.SECONDS));
+                System.out.println("the json is "+json.toString());
                   if (!json.has("httpError")) {
                 listJSON.add(json);
             }
@@ -152,26 +138,15 @@ public class DisplayData {
             } catch (TimeoutException ex) {
                 Logger.getLogger(DisplayData.class.getName()).log(Level.SEVERE, null, ex);
             }
-          
+//            JSONObject json = new JSONObject(list1.get());
+//                  if (!json.has("httpError")) {
+//                listJSON.add(json);
+//            }
+//          
             //listJSON.add(json);
 //            stringconcat += list1.get();
         }
-//         for (int i = 0; i < listwithFutures.size(); i++) {
-//           stringconcat="[";
-//           if(i>0)
-//           {
-//               stringconcat+=",";
-//           }
-//             if(listwithFutures.get(i)!=null)
-//             {
-//                 stringconcat+=listwithFutures.get(i);
-////                 stringconcat+=",";
-//             }
-//         }
-//       // stringconcat='['+stringconcat+']';
-//        stringconcat+="]";
 
-//       System.out.println(stringconcat);
         return listJSON;
     }
 
@@ -182,9 +157,13 @@ public class DisplayData {
     public static void main(String[] args) throws InterruptedException, ExecutionException, JSONException {
 
 //       for (int i = 0; i <20; i++) {
-        List<JSONObject> obj = new DisplayData().returnJsonStringAirlineInfo(10);
+        DisplayData data = new DisplayData();
+       // data.addUrls("CPH", "STN", "2016-01-14T19:00:00.000Z", 3);
+        List<JSONObject> obj = data.returnJsonStringAirlineInfo(10);
+        System.out.println("the size of the arraylist is "+obj.size());
         for (int i = 0; i < obj.size(); i++) {
             System.out.println(obj.get(i).toString());
+            
         }
 //   }
 

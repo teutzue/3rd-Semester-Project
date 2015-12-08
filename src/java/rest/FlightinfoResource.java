@@ -2,8 +2,11 @@ package rest;
 
 import ApiReader.DisplayData;
 import com.google.gson.Gson;
+import facades.UrlFacade;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -62,9 +65,20 @@ public class FlightinfoResource {
             @PathParam("numTickets") int passengernumber
     ) throws InterruptedException, ExecutionException, JSONException {
 
-        System.out.println(date);
+     
+        
+        UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
+      List<String> newturl = new  ArrayList<>();
+      List<String> listurl = cus.getAllUrl();
+        for (int i = 0; i < listurl.size(); i++)
+        {
+            String url = listurl.get(i) + from + "/" + to + "/" + date + "/" + passengernumber;
+            System.out.println("the url is "+url);
+            newturl.add(url);
+        }
+        data.addUrls(newturl);
+        
         Gson gson = new Gson();
-        data.addUrls(from, to, date, passengernumber);
         List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
 
         String output = "";
@@ -87,61 +101,50 @@ public class FlightinfoResource {
         System.out.println(output);
         return output;
 
-//        JsonArray jsonArray = new JsonArray();
-//        for (Person p : people) 
-//        {
-//            JsonObject json = new JsonObject();
-//            json.addProperty("id", p.getId());
-//            json.addProperty("firstName", p.getFirstName());
-//            json.addProperty("lastName", p.getLastName());
-//            json.addProperty("email", p.getEmail());
-//            
-//            List<Phone> phones = p.getPhones();
-//            if (!phones.isEmpty()) 
-//            {
-//            JsonArray phoneArray = new JsonArray();
-//            for (Phone phone : phones) {
-//                JsonObject phoneJson = new JsonObject();
-//                phoneJson.addProperty("number", phone.getNumber());
-//                phoneJson.addProperty("description", phone.getDescription());
-//                phoneArray.add(phoneJson);
-//            }
-//            json.add("phones", phoneArray); 
-//            }
-//
-//            if(p.getAddress() != null)
-//            {
-//                 json.addProperty("street", p.getAddress().getStreet());
-//                 json.addProperty("additionalInfo", p.getAddress().getAdditionalInfo());
-//                 
-//            
-//            if(p.getAddress().getCityInfo() != null)
-//                    {
-//            json.addProperty("zipcode", p.getAddress().getCityInfo().getZipCode());
-//            json.addProperty("city", p.getAddress().getCityInfo().getCity());
-//                        
-//                    }
-//            }
-//           
-//            List<Hobby> hobbies = p.getHobbys();
-//            JsonArray hobArray = new JsonArray();
-//            if(!hobbies.isEmpty())
-//            {
-//            for (Hobby hob : hobbies) 
-//            {
-//                JsonObject hobJson = new JsonObject();
-//                hobJson.addProperty("name", hob.getName());
-//                hobJson.addProperty("description", hob.getDescription());
-//                hobArray.add(hobJson);
-//            }
-//            json.add("hobbies", hobArray);
-//            }
-//            jsonArray.add(json);
-//        }
-//        return gson.toJson(jsonArray);
-//         return stringinfo;
-//        return gson.toJson(stringinfo);
     }
+    
+     
+//    @GET
+//    @Produces("application/json")
+//    @Path("{from}/{date}/{numTickets}")
+//    public String getFlight(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numTickets") int passengernumber) throws InterruptedException, ExecutionException, JSONException
+//    {
+//        
+//        UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
+//      List<String> newturl = new  ArrayList<>();
+//      List<String> listurl = cus.getAllUrl();
+//        for (int i = 0; i < listurl.size(); i++)
+//        {
+//            String url = listurl.get(i) + from + "/" + date + "/" + passengernumber;
+//            System.out.println("the url is "+url);
+//            newturl.add(url);
+//        }
+//        data.addUrls(newturl);
+//        
+//        Gson gson = new Gson();
+//        List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
+//
+//        String output = "";
+//        if (list.size() > 1) {
+//            output += "[";
+//            output += list.get(0).toString() + ",";
+//            for (int i = 1; i < list.size(); i++) {
+//                output += list.get(i).toString();
+//            }
+//            output += "]";
+//        } else {
+//            output += "[";
+//            for (int i = 0; i < list.size(); i++) {
+//
+//                output += list.get(i).toString();
+//            }
+//            output += "]";
+//        }
+//
+//        System.out.println(output);
+//        return output;
+
+  //  }
 //
 
 } // End of Class

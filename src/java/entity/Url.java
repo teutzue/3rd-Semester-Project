@@ -17,7 +17,6 @@ public class Url implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     public Integer getId() {
         return id;
     }
@@ -25,26 +24,28 @@ public class Url implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    
+    
+    
+    private String url;
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public String getUrl() {
+        return url;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Url)) {
-            return false;
-        }
-        Url other = (Url) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setUrl(String url) {
+        this.url = url;
     }
+
+    public Url() {
+    }
+    
+     
+    
+    
+
+   
 
     @Override
     public String toString() {

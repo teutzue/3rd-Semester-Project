@@ -48,28 +48,54 @@ angular.module('myApp.view1', ['ngRoute'])
 //            $scope.airlines;
 
             $scope.getData = function () {
+//
+//                if ($scope.dataTo.repeatSelectTo === undefined)
+//                {
+//                  alert("I am here");
+//                    $http({
+//                        method: 'GET',
+//                        url: 'api/flightinfo/'
+//                                + $scope.dataFrom.repeatSelectFrom + '/'
+//                                //   + $scope.dataTo.repeatSelectTo + '/'
+//                                + $scope.date.toISOString() + '/'
+////                            + $scope.dDate.toISOString() + '/'
+//                                + $scope.passengers
+//
+//                    }).then(function successCallback(response) {
+//                        $scope.airlines = response.data;
+//                        console.log( $scope.airlines );
+//
+//                    }, function errorCallback(response) {
+//                        alert("Error occured");
+//                    });
+//
+//                } else {
 
-                var year = $scope.dDate.getFullYear();
-                var month = $scope.dDate.getMonth();
-                var day = $scope.dDate.getDate();
-                $scope.date = new Date(year, month, day, 1);
+                    var year = $scope.dDate.getFullYear();
+                    var month = $scope.dDate.getMonth();
+                    var day = $scope.dDate.getDate();
+                    $scope.date = new Date(year, month, day, 1);
 
 
-                $http({
-                    method: 'GET',
-                    url: 'api/flightinfo/'
-                            + $scope.dataFrom.repeatSelectFrom + '/'
-                            + $scope.dataTo.repeatSelectTo + '/'
-                            + $scope.date.toISOString() + '/'
+
+
+                    $http({
+                        method: 'GET',
+                        url: 'api/flightinfo/'
+                                + $scope.dataFrom.repeatSelectFrom + '/'
+                                + $scope.dataTo.repeatSelectTo + '/'
+                                + $scope.date.toISOString() + '/'
 //                            + $scope.dDate.toISOString() + '/'
-                            + $scope.passengers
+                                + $scope.passengers
 
-                }).then(function successCallback(response) {
-                    $scope.airlines = response.data;
+                    }).then(function successCallback(response) {
+                        $scope.airlines = response.data;
 
-                }, function errorCallback(response) {
-                    alert("Error occured");
-                });
+                    }, function errorCallback(response) {
+                        alert("Error occured");
+                    });
+             //   }
+                ;
             };
         }); // End of Controller
 
