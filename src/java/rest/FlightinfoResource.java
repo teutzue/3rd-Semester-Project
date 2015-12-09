@@ -104,47 +104,47 @@ public class FlightinfoResource {
     }
     
      
-//    @GET
-//    @Produces("application/json")
-//    @Path("{from}/{date}/{numTickets}")
-//    public String getFlight(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numTickets") int passengernumber) throws InterruptedException, ExecutionException, JSONException
-//    {
-//        
-//        UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
-//      List<String> newturl = new  ArrayList<>();
-//      List<String> listurl = cus.getAllUrl();
-//        for (int i = 0; i < listurl.size(); i++)
-//        {
-//            String url = listurl.get(i) + from + "/" + date + "/" + passengernumber;
-//            System.out.println("the url is "+url);
-//            newturl.add(url);
-//        }
-//        data.addUrls(newturl);
-//        
-//        Gson gson = new Gson();
-//        List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
-//
-//        String output = "";
-//        if (list.size() > 1) {
-//            output += "[";
-//            output += list.get(0).toString() + ",";
-//            for (int i = 1; i < list.size(); i++) {
-//                output += list.get(i).toString();
-//            }
-//            output += "]";
-//        } else {
-//            output += "[";
-//            for (int i = 0; i < list.size(); i++) {
-//
-//                output += list.get(i).toString();
-//            }
-//            output += "]";
-//        }
-//
-//        System.out.println(output);
-//        return output;
+    @GET
+    @Produces("application/json")
+    @Path("/{from}/{date}/{numTickets}")
+    public String getFlight(@PathParam("from") String from, @PathParam("date") String date, @PathParam("numTickets") int passengernumber) throws InterruptedException, ExecutionException, JSONException
+    {
+        System.out.println("the from "+from+  " the date : "+date + "  numtickets "+passengernumber);
+        UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
+      List<String> newturl = new  ArrayList<>();
+      List<String> listurl = cus.getAllUrl();
+        for (int i = 0; i < listurl.size(); i++)
+        {
+            String url = listurl.get(i) + from + "/" + date + "/" + passengernumber;
+            System.out.println("the url is "+url);
+            newturl.add(url);
+        }
+        data.addUrls(newturl);
+        
+        Gson gson = new Gson();
+        List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
 
-  //  }
+        String output = "";
+        if (list.size() > 1) {
+            output += "[";
+            output += list.get(0).toString() + ",";
+            for (int i = 1; i < list.size(); i++) {
+                output += list.get(i).toString();
+            }
+            output += "]";
+        } else {
+            output += "[";
+            for (int i = 0; i < list.size(); i++) {
+
+                output += list.get(i).toString();
+            }
+            output += "]";
+        }
+
+        System.out.println(output);
+        return output;
+
+    }
 //
 
 } // End of Class

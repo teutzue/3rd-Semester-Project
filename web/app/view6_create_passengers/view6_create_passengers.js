@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.view5_create_new_account', ['ngRoute'])
+angular.module('myApp.view6_create_passengers', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
-                $routeProvider.when('/view5_create_new_account', {
-                    templateUrl: 'app/view5_create_new_account/view5_create_new_account.html',
-                    controller: 'view5_create_new_accountCtrl'
+                $routeProvider.when('/view6_create_passengers', {
+                    templateUrl: 'app/view6_create_passengers/view6_create_passengers.html',
+                    controller: 'view6_create_passengersCtrl'
                 });
             }])
 
-        .controller('view5_create_new_accountCtrl', function ($scope, $http) {
+        .controller('view6_create_passengersCtrl', function ($scope, $http) {
 
             $scope.wrongPs = "visibility: hidden";
             $scope.missingPS = "visibility: hidden";
@@ -135,4 +135,5 @@ angular.module('myApp.view5_create_new_account', ['ngRoute'])
 //                }
 //                return true;
 //            };
+
         }); // End of controller

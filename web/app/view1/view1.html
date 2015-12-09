@@ -1,30 +1,51 @@
-<fieldset class="form-group"><br /><br />
-    <label>From:
-        <select class="form-control" name="repeatSelectFrom" id="repeatSelectFrom" ng-model="dataFrom.repeatSelectFrom">
-            <option value="" disabled selected hidden>Please Choose</option>
-            <option ng-repeat="from in dataFrom.origins" id="from" value="{{from.origin}}">{{from.description}}</option>
-        </select>
-    </label>
-    <label>To:
-        <select class="form-control" name="repeatSelectTo" id="repeatSelectTo" ng-model="dataTo.repeatSelectTo">
-            <option value="" disabled selected hidden>Please Choose</option>
-            <option ng-repeat="to in dataTo.destinations" id="to" value="{{to.destination}}">{{to.description}}</option>
-        </select>
-    </label>
-    <label>Departure Date:
-        <input type="date" class="form-control" ng-model="dDate">
-    </label>
-    <!--    <label>Return Date:
-            <input type="date" class="form-control" ng-model="fDate">
-        </label>-->
-    <label>Passengers:
-        <input type="number" ng-model="passengers" id="amount" class="form-control" min="1" placeholder="number">
-    </label>
-    <button class="btn btn-success" ng-click="getData()()">
-        <span class="glyphicon  glyphicon-cog"></span>Search
-    </button>
-</fieldset>
 <div class="container">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10">
+        <fieldset class="form-group"><br /><br />
+            <label>From:
+                <select class="form-control" name="repeatSelectFrom" id="repeatSelectFrom" ng-model="dataFrom.repeatSelectFrom">
+                    <option value="" disabled selected hidden>Please Choose</option>
+                    <option ng-repeat="from in dataFrom.origins" id="from" value="{{from.origin}}">{{from.description}}</option>
+                </select>
+            </label>
+            <label>To:
+                <select class="form-control" name="repeatSelectTo" id="repeatSelectTo" ng-model="dataTo.repeatSelectTo">
+                    <option value="" disabled selected hidden>Please Choose</option>
+                    <option ng-repeat="to in dataTo.destinations" id="to" value="{{to.destination}}">{{to.description}}</option>
+                </select>
+            </label>
+            <label>Departure Date:
+                <input type="date" class="form-control" ng-model="dDate">
+            </label>
+            <!--    <label>Return Date:
+                    <input type="date" class="form-control" ng-model="fDate">
+                </label>-->
+            <label>Passengers:
+                <input type="number" ng-model="passengers" id="amount" class="form-control" min="1" placeholder="number">
+            </label>
+            <button class="btn btn-success" ng-click="getData()()">
+                <span class="glyphicon  glyphicon-cog"></span>Search
+            </button>
+        </fieldset>
+    </div>
+    <div class="col-xs-1"></div>
+</div>
+<p>{{feedBack}}</p>
+<div class="sk-circle" ng-show="showSpinner">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+</div>
+<div class="container" ng-show="showTable">
     <table class="table table-striped table-bordered table-hover table-condensed">
         <thead>
             <tr>
@@ -45,7 +66,7 @@
                 <td>{{flight.flightID}}</td>
                 <td>{{flight.numberOfSeats}}</td>
                 <td>{{flight.date| date}}</td>
-                <td>{{flight.totalPrice}}</td>
+                <td>&euro;{{flight.totalPrice}}</td>
                 <td>{{flight.origin}}</td>
                 <td>{{flight.traveltime}}</td>
                 <td>{{flight.destination}}</td>
@@ -55,21 +76,9 @@
             </tr>
         </tbody>
     </table>
-    <div class="sk-circle" ng-show="showSpinner">
-        <div class="sk-circle1 sk-child"></div>
-        <div class="sk-circle2 sk-child"></div>
-        <div class="sk-circle3 sk-child"></div>
-        <div class="sk-circle4 sk-child"></div>
-        <div class="sk-circle5 sk-child"></div>
-        <div class="sk-circle6 sk-child"></div>
-        <div class="sk-circle7 sk-child"></div>
-        <div class="sk-circle8 sk-child"></div>
-        <div class="sk-circle9 sk-child"></div>
-        <div class="sk-circle10 sk-child"></div>
-        <div class="sk-circle11 sk-child"></div>
-        <div class="sk-circle12 sk-child"></div>
-    </div>
+
 </div>
+
 
 
 
