@@ -1,13 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package testers;
 
 import deploy.DeploymentConfiguration;
+import entity.Booking;
+import entity.Passenger;
+
 import facades.UrlFacade;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
@@ -25,6 +29,41 @@ public class BoTester {
 //        {
 //            System.out.println(string.get(i));    
 //        }
+        
+        
+//        Booking book = new Booking();
+//        book.setDate("2016-01-10T19:00:00.000Z");
+//        book.setFlightID("COL3256x100x2016-01-10T19:00:00.000Z");
+//        book.setDestination("London Stansted(STN)");
+//        book.setOrigin("Copenhagen Kastrup(CPH)");
+//        book.setFlightTime(90);
+//        book.setNumberOfSeats(2);
+//        book.setReserveeName("Peter Hansen");
+//        Passenger one = new Passenger("Peter","Peterson");
+//        Passenger two=new Passenger("Jane","Peterson");
+//       
+//           
+//        
+//        book.addPassengers(one);
+//        book.addPassengers(two);
+//        book.setUsername("Pesho");
+//    
+//    
+//          EntityManagerFactory factory;
+//          factory = Persistence.createEntityManagerFactory("PU-Local");
+//          
+//          EntityManager em = factory.createEntityManager();
+//       try{
+//          em.getTransaction().begin();
+//       
+//          em.persist(book);
+//          em.getTransaction().commit();
+//       }finally{
+//
+//          em.close();
+//     }
+//        
+        
     }
     
     

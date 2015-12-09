@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +35,21 @@ public class User implements Serializable {
     this.userName = userName;
     this.password = password;
   }
+  
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn
+    List<Booking> listbook;
+   
+
+    public void addBooking(Booking cc) {
+        if (listbook == null) {
+            listbook = new ArrayList<>();
+        }
+        listbook.add(cc);
+        
+    }
+    
+    
 
   public List<String> getRolesAsStrings(){
     List<String> rolesAsStrings = new ArrayList();

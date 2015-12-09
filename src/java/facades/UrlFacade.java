@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -41,7 +42,7 @@ public class UrlFacade {
     public List<String> getAllUrl() {
         EntityManager em = emf.createEntityManager();
 //        TypedQuery<String> query = em.createQuery("SELECT c FROM Url c", (Class<T>) Url.class);
-        TypedQuery<String> query = em.createQuery("Select c.url FROM Url c",String.class);
+        Query query = em.createQuery("Select c.url FROM Url c");
         // query.setParameter("phonenr", phone);
         List<String> results = null;
         try {
