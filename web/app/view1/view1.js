@@ -10,7 +10,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 });
             }])
 
-        .controller('View1Ctrl', function ($http, $scope, dateFilter) {
+        .controller('View1Ctrl', function ($http, $scope, dateFilter, $rootScope) {
 
 //            $http({
 //                method: 'GET',
@@ -54,12 +54,6 @@ angular.module('myApp.view1', ['ngRoute'])
             $scope.getData = function () {
 
                 $scope.feedBack = "";
-
-//                var year = $scope.dDate.getFullYear();
-//                var month = $scope.dDate.getMonth();
-//                var day = $scope.dDate.getDate();
-//                $scope.date = new Date(year, month, day, 1);
-
 
                 if (!(($scope.dataFrom.repeatSelectFrom === null) | $scope.date === null)) {
 
@@ -112,10 +106,6 @@ angular.module('myApp.view1', ['ngRoute'])
                                     + $scope.passengers
 
                         }).then(function successCallback(response) {
-//                            $scope.airlines = response.data;
-//                            console.log($scope.airlines);
-//                            $scope.showSpinner = false;
-//                            $scope.showTable = true;
                             if (response.data[0] == undefined) {
                                 $scope.feedBack = "No Flight is found";
                                 $scope.airlines = response.data;
@@ -134,14 +124,40 @@ angular.module('myApp.view1', ['ngRoute'])
                             $scope.showTable = true;
 
                         });
-                    }
-                    ; // End of if-else(to)
-                }
-                ; // End of if(from)
+                    }; // End of if-else(to)
+                }; // End of if(from)
+            }; // End of getData
+            
+            $scope.bookTicket = function (airline, flight) {
+                
+                var booking = {
+                    airline : airline,
+                    flightID : flight.flightID,
+                    numberOfSeats : flight.numberOfSeats,
+                    date : flight.date,
+                    totalPrice : flight.totalPrice,
+                    origin : flight.origin,
+                    traveltime : flight.traveltime,
+                    destination : flight.destination
+                };
+                
+               $rootScope.rsBooking = booking;
             };
+            
+            
+            
         }); // End of Controller
 
 
+
+// <td>{{airline.airline}}</td>
+//                <td>{{flight.airline}}</td>
+//                <td>{{flight.numberOfSeats}}</td>
+//                <td>{{flight.date| date}}</td>
+//                <td>&euro;{{flight.totalPrice}}</td>
+//                <td>{{flight.origin}}</td>
+//                <td>{{flight.traveltime}}</td>
+//                <td>{{flight.destination}}</td>
 
 
 
