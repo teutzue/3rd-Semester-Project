@@ -23,6 +23,7 @@ angular.module('myApp.view1', ['ngRoute'])
 //            });
 
             $scope.showSpinner = false;
+            $scope.feedBack = "";
 
             $scope.passengers = 1;
             $scope.dataFrom = {
@@ -51,56 +52,92 @@ angular.module('myApp.view1', ['ngRoute'])
 //            $scope.airlines;
 
             $scope.getData = function () {
-                
-                $scope.showSpinner = true;
-                
-                var year = $scope.dDate.getFullYear();
-                var month = $scope.dDate.getMonth();
-                var day = $scope.dDate.getDate();
-                $scope.date = new Date(year, month, day, 1);
+
+                $scope.feedBack = "";
+
+//                var year = $scope.dDate.getFullYear();
+//                var month = $scope.dDate.getMonth();
+//                var day = $scope.dDate.getDate();
+//                $scope.date = new Date(year, month, day, 1);
 
 
-                if ($scope.dataTo.repeatSelectTo === null) {
-                   
-                    $http({
-                        method: 'GET',
-                        url: 'api/flightinfo/'
-                                + $scope.dataFrom.repeatSelectFrom + '/'
-                                //   + $scope.dataTo.repeatSelectTo + '/'
-                                + $scope.date.toISOString() + '/'
-//                            + $scope.dDate.toISOString() + '/'
-                                + $scope.passengers
+                if (!(($scope.dataFrom.repeatSelectFrom === null) | $scope.date === null)) {
 
-                    }).then(function successCallback(response) {
-                        $scope.airlines = response.data;
-                        console.log($scope.airlines);
-                        $scope.showSpinner = false;
+                    $scope.showSpinner = true;
+                    $scope.showTable = false;
 
-                    }, function errorCallback(response) {
-                        alert("Error occured");
-                        $scope.showSpinner = false;
-                    });
+                    var year = $scope.dDate.getFullYear();
+                    var month = $scope.dDate.getMonth();
+                    var day = $scope.dDate.getDate();
+                    $scope.date = new Date(year, month, day, 1);
 
-                } else {
+                    if ($scope.dataTo.repeatSelectTo === null) {
 
-                    $http({
-                        method: 'GET',
-                        url: 'api/flightinfo/'
-                                + $scope.dataFrom.repeatSelectFrom + '/'
-                                + $scope.dataTo.repeatSelectTo + '/'
-                                + $scope.date.toISOString() + '/'
-                                + $scope.passengers
+                        $http({
+                            method: 'GET',
+                            url: 'api/flightinfo/'
+                                    + $scope.dataFrom.repeatSelectFrom + '/'
+                                    + $scope.date.toISOString() + '/'
+                                    + $scope.passengers
 
-                    }).then(function successCallback(response) {
-                        $scope.airlines = response.data;
-                        console.log($scope.airlines);
-                        $scope.showSpinner = false;
+                        }).then(function successCallback(response) {
 
-                    }, function errorCallback(response) {
-                        alert("Error occured");
-                        $scope.showSpinner = false;
-                    });
-                };
+                            if (response.data[0] == undefined) {
+                                $scope.feedBack = "No Flight is found";
+                                $scope.airlines = response.data;
+                                $scope.showTable = false;
+
+                            } else {
+                                $scope.airlines = response.data;
+                                $scope.showTable = true;
+                            } // End of if-else
+                            $scope.showSpinner = false;
+
+
+                        }, function errorCallback(response) {
+                            alert("Error occured");
+                            $scope.showSpinner = false;
+                            $scope.showTable = true;
+
+                        });
+
+                    } else {
+
+                        $http({
+                            method: 'GET',
+                            url: 'api/flightinfo/'
+                                    + $scope.dataFrom.repeatSelectFrom + '/'
+                                    + $scope.dataTo.repeatSelectTo + '/'
+                                    + $scope.date.toISOString() + '/'
+                                    + $scope.passengers
+
+                        }).then(function successCallback(response) {
+//                            $scope.airlines = response.data;
+//                            console.log($scope.airlines);
+//                            $scope.showSpinner = false;
+//                            $scope.showTable = true;
+                            if (response.data[0] == undefined) {
+                                $scope.feedBack = "No Flight is found";
+                                $scope.airlines = response.data;
+                                $scope.showTable = false;
+
+                            } else {
+                                $scope.airlines = response.data;
+                                $scope.showTable = true;
+                            } // End of if-else
+                            $scope.showSpinner = false;
+
+
+                        }, function errorCallback(response) {
+                            alert("Error occured");
+                            $scope.showSpinner = false;
+                            $scope.showTable = true;
+
+                        });
+                    }
+                    ; // End of if-else(to)
+                }
+                ; // End of if(from)
             };
         }); // End of Controller
 
