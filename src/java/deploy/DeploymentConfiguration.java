@@ -28,11 +28,11 @@ public class DeploymentConfiguration implements ServletContextListener {
     //If we are running in the OPENSHIFT environment change the pu-name 
     if (env.keySet().contains("OPENSHIFT_MYSQL_DB_HOST")) {
       PU_NAME = "PU_OPENSHIFT";
+      Persistence.generateSchema(DeploymentConfiguration.PU_NAME, null);
     }
     try {
       ServletContext context = sce.getServletContext();
       EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
-      Persistence.generateSchema(DeploymentConfiguration.PU_NAME, null);
       EntityManager em = emf.createEntityManager();
       
       //This flag is set in Web.xml -- Make sure to disable for a REAL system
