@@ -129,7 +129,7 @@ angular.module('myApp.view1', ['ngRoute'])
             }; // End of getData
             
             $scope.bookTicket = function (airline, flight) {
-                
+                alert("I am in the function");
                 var booking = {
                     airline : airline,
                     flightID : flight.flightID,

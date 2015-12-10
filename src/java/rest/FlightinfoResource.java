@@ -167,7 +167,7 @@ public class FlightinfoResource {
     @Produces("application/json")
     public String postPerson(String jsonAsString) throws MalformedURLException, IOException 
     {
-        Gson gson = new Gson();  
+         Gson gson = new Gson();  
          JsonObject json = new JsonObject();
         
        

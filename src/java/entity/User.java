@@ -53,7 +53,7 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
     List<Booking> listbook;
 
