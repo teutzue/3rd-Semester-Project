@@ -9,7 +9,7 @@ angular.module('myApp.view6_create_passengers', ['ngRoute'])
                 });
             }])
 
-        .controller('view6_create_passengersCtrl', function ($scope, $http) {
+        .controller('view6_create_passengersCtrl', function ($scope, $http, InfoService) {
 
             $scope.wrongPs = "visibility: hidden";
             $scope.missingPS = "visibility: hidden";
@@ -117,6 +117,11 @@ angular.module('myApp.view6_create_passengers', ['ngRoute'])
                 }
                 return true;
             };
+            
+            $scope.seats = [];
+            for (var i = 0; i < InfoService.seats-1; i++) {
+                $scope.seats.push(i);
+            }
             //-----------------------------------------------
 //            var checkFirstName = function (firstName) {
 //

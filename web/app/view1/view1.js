@@ -10,7 +10,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 });
             }])
 
-        .controller('View1Ctrl', function ($http, $scope, dateFilter, $rootScope) {
+        .controller('View1Ctrl', function ($http, $scope, dateFilter, $rootScope, InfoService) {
 
 //            $http({
 //                method: 'GET',
@@ -138,10 +138,13 @@ angular.module('myApp.view1', ['ngRoute'])
                     totalPrice : flight.totalPrice,
                     origin : flight.origin,
                     traveltime : flight.traveltime,
-                    destination : flight.destination
+                    destination : flight.destination,
+                    passengers: $scope.passengers
                 };
                 
                $rootScope.rsBooking = booking;
+               InfoService.seats = booking.passengers;
+               //InfoService.seats = passengers;
             };
             
             

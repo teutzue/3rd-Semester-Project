@@ -1,12 +1,9 @@
 
 
-<h1>Using the Seed</h1>
-
+<h1>Booking</h1>
 <div >
     <uib-accordion>
-        <uib-accordion-group heading="Passenger 1" >
-
-
+        <uib-accordion-group heading="The one who buys and is a passenger also">
             <div class="modal-body">
                 <form id="registerForm">
                     <!---form--->           <div class="form-group">
@@ -121,10 +118,7 @@
             </div>
 
         </uib-accordion-group>
-        <uib-accordion-group is-open="status.isFirstOpen" >
-            <uib-accordion-heading>
-                Passenger 1
-            </uib-accordion-heading>
+        <uib-accordion-group heading="Passenger {{passenger + 1}}"  ng-repeat="passenger in seats">
             <div class="modal-body">
                 <form id="registerForm">
                     <!---form--->           <div class="form-group">
@@ -133,13 +127,6 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" ng-focus="Focus()" ng-model="firstName" name="firstName" placeholder="Enter First Name" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                            </div>
-                            <br>
-                            <label for="InputName">Username</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control"  ng-focus="Focus()" ng-model="userName" name="username" placeholder="Enter Username" required>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                <span style="{{Style(isSaved)}}">{{feetbackError}}</span>
                             </div>
                             <!--------------------------------------separator---------------------------------------------------------------> <hr>
                         </div>
@@ -152,21 +139,7 @@
                                 <input type="text" class="form-control" ng-focus="Focus()" ng-model="lastName" name="lastName" placeholder="Enter Last Name" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
-
-                            <br>
-                            <label for="InputPassword">Enter Password</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" ng-focus="Focus()" ng-model="password" name="password" placeholder="Enter Password" required>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                                <span style="{{missingPS}}; color: red">Missing Password</span>
-                            </div>
                             <!--------------------------------------separator---------------------------------------------------------------> <hr>
-                        </div>
-                        <label for="InputPassword">Re-Enter Password</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" name="re-password" ng-focus="Focus()" ng-model="password2" placeholder="Re-Enter Password" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                            <span style="{{wrongPs}}; color: red">Wrong! Retype Password</span>
                         </div>
                     </div> 
 
