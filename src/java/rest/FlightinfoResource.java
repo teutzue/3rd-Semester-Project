@@ -1,16 +1,32 @@
 package rest;
 
+import util.JSONConverter;
 import ApiReader.DisplayData;
+//import JSONConverter;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import entity.Booking;
 import facades.UrlFacade;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import org.json.JSONException;
@@ -145,6 +161,75 @@ public class FlightinfoResource {
         return output;
 
     }
+    
+     @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    public String postPerson(String jsonAsString) throws MalformedURLException, IOException 
+    {
+        Gson gson = new Gson();  
+         JsonObject json = new JsonObject();
+        
+       
+     String url = "http://angularairline-plaul.rhcloud.com/api/flightreservation/";
+     
+        HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+        con.setRequestProperty("Content-Type", "application/json;");
+        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Method", "POST");
+        con.setDoOutput(true);
+        PrintWriter pw = new PrintWriter(con.getOutputStream());
+        try (OutputStream os = con.getOutputStream()) {
+            os.write(jsonAsString.getBytes("UTF-8"));
+        }
+        int HttpResult = con.getResponseCode();
+        InputStreamReader is = HttpResult < 400 ? new InputStreamReader(con.getInputStream(), "utf-8")
+                : new InputStreamReader(con.getErrorStream(), "utf-8");
+        Scanner responseReader = new Scanner(is);
+        String response = "";
+        while (responseReader.hasNext()) {
+            response += responseReader.nextLine() + System.getProperty("line.separator");
+        }
+        System.out.println(response);
+        System.out.println(con.getResponseCode());
+        System.out.println(con.getResponseMessage());
+     
+        
+        Booking book = JSONConverter.getBookingFromJSON(response);
+        // Booking book = JSONConverter.getBookingFromJSON(response);
+        System.out.println("The book constructed is "+book.toString());
+        
+         EntityManagerFactory factory;
+          factory = Persistence.createEntityManagerFactory("PU-Local");
+          
+          EntityManager em = factory.createEntityManager();
+       try{
+          em.getTransaction().begin();
+       
+          em.persist(book);
+          em.getTransaction().commit();
+          
+          
+         json.addProperty("info", "Book Saved");
+        return gson.toJson(json);
+          
+       }catch(Exception e)
+        {
+            json.addProperty("info", "Not Booked");
+            return gson.toJson(json);
+        }   
+       finally{
+
+          em.close();
+     }
+        
+        
+        
+    }
+    
+    
+    
+    
 //
 
 } // End of Class

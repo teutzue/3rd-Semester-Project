@@ -24,16 +24,17 @@ import javax.persistence.OneToMany;
 @Entity
 public class Booking implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private String Username;
-
-    public String getusername() {
-        return Username;
+    public int getId() {
+        return id;
     }
 
-    public void setgetusername(String username) {
-        this.Username = username;
+    public void setgetusername(int id) {
+        this.id = id;
     }
 
     public Booking() {
@@ -48,13 +49,7 @@ public class Booking implements Serializable {
     int numberOfSeats;
     String ReserveeName;
 
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        this.Username = username;
-    }
+  
 
     public String getFlightID() {
         return flightID;
