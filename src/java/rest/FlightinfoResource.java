@@ -4,9 +4,14 @@ import util.JSONConverter;
 import ApiReader.DisplayData;
 //import JSONConverter;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import entity.Booking;
+import entity.Passenger;
 import facades.UrlFacade;
+import facades.UserFacade;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -21,6 +26,7 @@ import java.util.concurrent.ExecutionException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -42,7 +48,7 @@ public class FlightinfoResource {
 
 //    private GetTheAirlineInfo get = new GetTheAirlineInfo();
     DisplayData data = new DisplayData();
-
+   String url="";
     @Context
     private UriInfo context;
 
@@ -118,7 +124,56 @@ public class FlightinfoResource {
         return output;
 
     }
-    
+      @GET
+    @Path("allidiots")
+    @Produces("application/json")
+    public String getUserInfo( )  {
+
+     
+        
+        UserFacade cus = new UserFacade();
+        List<String> usernames = cus.getUserNames();
+//          for (int i = 0; i <usernames.size() ; i++) 
+//          {
+//              List<Booking> bookinfoforuser = 
+//          }
+        
+        
+//      List<String> newturl = new  ArrayList<>();
+//      List<String> listurl = cus.getAllUrl();
+//        for (int i = 0; i < listurl.size(); i++)
+//        {
+//            String url = listurl.get(i) + from + "/" + to + "/" + date + "/" + passengernumber;
+//            System.out.println("the url is "+url);
+//            newturl.add(url);
+//        }
+//        data.addUrls(newturl);
+//        
+//        Gson gson = new Gson();
+//        List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
+//
+//        String output = "";
+//        if (list.size() > 1) {
+//            output += "[";
+//            output += list.get(0).toString() + ",";
+//            for (int i = 1; i < list.size(); i++) {
+//                output += list.get(i).toString();
+//            }
+//            output += "]";
+//        } else {
+//            output += "[";
+//            for (int i = 0; i < list.size(); i++) {
+//
+//                output += list.get(i).toString();
+//            }
+//            output += "]";
+//        }
+//
+//        System.out.println(output);
+//        return output;
+        return null;
+
+    }
      
     @GET
     @Produces("application/json")
@@ -171,7 +226,7 @@ public class FlightinfoResource {
          JsonObject json = new JsonObject();
         
        
-     String url = "http://angularairline-plaul.rhcloud.com/api/flightreservation/";
+    // String url = "http://angularairline-plaul.rhcloud.com/api/flightreservation/";
      
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
         con.setRequestProperty("Content-Type", "application/json;");
@@ -227,8 +282,26 @@ public class FlightinfoResource {
         
     }
     
-    
-    
+    @POST
+    @Path("name")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public String postAirline(String jsonAsString) throws MalformedURLException, IOException {
+        Gson gson = new Gson();
+        JsonObject json = new JsonObject();
+
+        JsonObject nameAirline = new JsonParser().parse(jsonAsString).getAsJsonObject();
+        System.out.println("the nameAirline is " + nameAirline.toString());
+
+        String name = nameAirline.get("name").getAsString();
+        UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
+        url = cus.findUrl(name);
+        System.out.println("the url is " + url);
+        
+       // return "bla".toJson();
+          json.addProperty("info", url);
+          return gson.toJson(json);
+    }
     
 //
 

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import security.PasswordHash;
 
 public class UserFacade {
@@ -19,6 +20,25 @@ public class UserFacade {
 
     public UserFacade() {
 
+    }
+    
+     public List<String> getUserNames() 
+     {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query query = em.createQuery("select c.userName from User c");
+        // query.setParameter("phonenr", phone);
+        List<String> results = null;
+        try {
+            results = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("Fejl i getAllUserNames: " + e.getMessage());
+        }
+        return results;
+
+        } finally {
+            em.close();
+        }
     }
 
     public User getUserByUserId(String id) {

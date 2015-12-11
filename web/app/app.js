@@ -12,6 +12,7 @@ angular.module('myApp', [
   'myApp.view4',
   'myApp.view5_create_new_account',
   'myApp.view6_create_passengers',
+  'myApp.view7',
   'myApp.filters',
   'myApp.directives',
   'myApp.factories',

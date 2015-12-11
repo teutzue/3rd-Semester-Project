@@ -53,7 +53,15 @@ public class UrlFacade {
         return results;
 
     }
-    
+    public String findUrl(String nam4e)
+    {
+     EntityManager em = emf.createEntityManager();
+
+     Query query = em.createQuery("SELECT c.url FROM Url c WHERE c.name=:name", String.class);
+     query.setParameter("name", nam4e);
+     String result = (String) query.getSingleResult();
+     return result;
+    }
     
 
     public Url getUrlByUserId(String id) {

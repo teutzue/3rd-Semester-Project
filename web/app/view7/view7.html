@@ -1,0 +1,64 @@
+
+
+<table class="table table-hover table-striped table-condensed table-bordered ordersTable" data-ng-controller="View7Ctrl">
+    <thead>
+        <tr>
+            <th >UserName</th>
+            <th >ReserveeName</th>
+            <th >Number of Passengers</th>
+            <th >Phone</th>
+            <th >Email</th>
+            <th >Destination</th>
+            <th >Origin</th>
+            <th >Date</th>
+                  
+              
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-ng-hide="usersi.length > 0" class="error">
+            <td colspan="4">
+                <div class="text-center"><strong>No orders found</strong></div>
+            </td>
+        </tr>
+        <tr data-ng-repeat="user in usersi">
+            <td>
+                {{ user.username }}
+            </td>
+            <td>
+                {{ user.ReserveeName }}
+            </td>
+            <td>
+                {{ user.numberOfSeats}}
+            </td>
+              <td>
+                {{ user.ReservePhone}}
+            </td>
+              <td>
+                {{ user.ReserveeEmail}}
+            </td>
+              <td>
+             
+                {{ user.Destination}}
+            </td>
+              <td>
+                
+            
+                  {{ user.Origin}}
+            </td>
+              <td>
+                
+                {{ user.Date|date}}
+                
+            </td>
+          
+           
+        </tr>
+        <tr class="info">
+            <td colspan="3">
+                &nbsp;
+            </td>
+          
+        </tr>
+    </tbody>
+</table>
