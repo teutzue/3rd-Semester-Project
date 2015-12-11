@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -28,6 +29,17 @@ public class Booking implements Serializable {
     @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
 
     public int getId() {
         return id;
@@ -107,16 +119,21 @@ public class Booking implements Serializable {
         this.ReserveeName = ReserveeName;
     }
 
-    @OneToMany(cascade=CascadeType.PERSIST)
-    @JoinColumn      
+    @OneToMany(mappedBy = "booking",cascade=CascadeType.ALL)
+    @JoinColumn  
     List<Passenger> list;
-  
+    
+//    @OneToMany(cascade=CascadeType.PERSIST)
+//    @JoinColumn      
+//    List<Passenger> list;
+//  
     public void addPassengers(Passenger cc) 
     {
         if (list == null) {
             list = new ArrayList<>();
         }
         list.add(cc);
+        cc.setBooking(this);
         
     }
 

@@ -52,17 +52,22 @@ public class User implements Serializable {
         this.zipCode = zipCode;
         this.phone = phone;
     }
-
-    @OneToMany(cascade = CascadeType.ALL)
+    
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @JoinColumn
     List<Booking> listbook;
 
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn
+//    List<Booking> listbook;
+//
     public void addBooking(Booking cc) {
         if (listbook == null) {
             listbook = new ArrayList<>();
+            
         }
         listbook.add(cc);
-
+        cc.setUser(this);
     }
 
     public List<String> getRolesAsStrings() {
