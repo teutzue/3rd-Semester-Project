@@ -44,8 +44,10 @@ public class DeploymentConfiguration implements ServletContextListener {
       Role userRole = new Role("User");
       Role adminRole = new Role("Admin");
       Url url1 = new Url();
+      url1.setName("AngularJS Airline");
       url1.setUrl("http://angularairline-plaul.rhcloud.com/api/flightinfo/");
       Url url2 = new Url();
+      url2.setName("Norwegian");
       url2.setUrl("http://sargardon-001-site1.atempurl.com/api/flightinfo/");
       //  String email, String address, String city, String country, String zipCode, int phone)
       User user = new User(PasswordHash.createHash("test"),"user","Bo","Vilstrup","bo@yahoo.com","adress 200","Kongens Lyngby","Danmark",2800,72952797);
