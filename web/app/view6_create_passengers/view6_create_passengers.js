@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view6_create_passengers', ['ngRoute'])
+angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
 
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/view6_create_passengers', {
@@ -122,6 +122,34 @@ angular.module('myApp.view6_create_passengers', ['ngRoute'])
             for (var i = 0; i < InfoService.seats-1; i++) {
                 $scope.seats.push(i);
             }
+            $scope.passArr = [];
+            
+            $scope.submitRes = function () {
+                 var resPas = JSON.stringify({
+                        flightID:"Colasdflaksjfdasdf",//GET IT FROM THE TABLE
+                        numberOfSeats: $scope.passArr.length,
+                        ReserveeName: $scope.firstName,
+                        ReservePhone: $scope.phone,
+                        ReserveeEmail: $scope.email,
+                        Passengers : $scope.passArr
+                        
+                    });
+                    console.log(resPas);
+            };
+            
+            $scope.testBut = function(){
+                
+                console.log($scope.firstName);
+                console.log($scope.phone);
+                console.log($scope.email);
+                    
+            }
+            
+             
+            
+            
+            
+            
             //-----------------------------------------------
 //            var checkFirstName = function (firstName) {
 //
