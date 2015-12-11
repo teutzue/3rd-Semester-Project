@@ -30,6 +30,7 @@ angular.module('myApp.security', [])
 
 
           $scope.username = "";
+          $rootScope.theUsername = ""; // Added by Bo
           $scope.isAuthenticated = false;
           $scope.isAdmin = false;
           $scope.isUser = false;
@@ -45,6 +46,7 @@ angular.module('myApp.security', [])
                       var encodedProfile = data.token.split('.')[1];
                       var profile = JSON.parse(url_base64_decode(encodedProfile));
                       $scope.username = profile.username;
+                      $rootScope.theUsername = profile.username; // Added by Bo
                       var roles = profile.roles.split(",");
                       roles.forEach(function (role) {
                         if (role === "Admin") {
@@ -64,6 +66,7 @@ angular.module('myApp.security', [])
                       $scope.isAdmin = false;
                       $scope.isUser = false;
                       $scope.username = "";
+                      $rootScope.theUsername = ""; // Added by Bo
                       $scope.error = data.error;
                       //$scope.logout();  //Clears an eventual error message from timeout on the inner view
                     });
@@ -85,6 +88,7 @@ angular.module('myApp.security', [])
               var encodedProfile = token.split('.')[1];
               var profile = JSON.parse(url_base64_decode(encodedProfile));
               $scope.username = profile.username;
+              $rootScope.theUsername = profile.username; //added by Bo
               $scope.isAdmin = profile.role === "Admin";
               $scope.isUser = !$scope.isAdmin;
               $scope.error = null;

@@ -8,23 +8,16 @@ angular.module('myApp.view2', ['ngRoute'])
                 });
             }])
 
-        .controller('View2Ctrl', function ($http, $scope) {
-//            $http({
-//                method: 'GET',
-//                url: 'api/demouser'
-//            }).then(function successCallback(res) {
-//                $scope.data = res.data.message;
-//            }, function errorCallback(res) {
-//                $scope.error = res.status + ": " + res.data.statusText;
-//            });
-
-            //----------------------------------------------
-
-//            
+        .controller('View2Ctrl', function ($http, $scope, $rootScope) {
+            
+            $http({
+                method: 'GET',
+                url: 'api/reservations' + '/' + $rootScope.theUsername
+            }).then(function successCallback(response) {
+                $scope.data = response.data.message;
+            }, function errorCallback(res) {
+                $scope.error = res.status + ": " + res.data.statusText;
+            });
 
 
-
-            // ----------------------------------------------
-
-
-        }); // End of Controller
+        }); // End of Controllere
