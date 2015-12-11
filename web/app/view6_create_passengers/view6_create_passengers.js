@@ -9,7 +9,7 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                 });
             }])
 
-        .controller('view6_create_passengersCtrl', function ($scope, $http, InfoService) {
+        .controller('view6_create_passengersCtrl', function ($scope, $http, InfoService,$rootScope) {
 
             $scope.wrongPs = "visibility: hidden";
             $scope.missingPS = "visibility: hidden";
@@ -126,7 +126,7 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
             
             $scope.submitRes = function () {
                  var resPas = JSON.stringify({
-                        flightID:"Colasdflaksjfdasdf",//GET IT FROM THE TABLE
+                        flightID:$rootScope.rsBooking.flightID,//GET IT FROM THE TABLE
                         numberOfSeats: $scope.passArr.length,
                         ReserveeName: $scope.firstName,
                         ReservePhone: $scope.phone,
@@ -134,16 +134,23 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                         Passengers : $scope.passArr
                         
                     });
+                    var req = {
+                        method: 'POST',
+                        url: 'api/flightinfo/submitBooking',
+                        headers: {'Content-Type': 'application/json'},
+                        data: resPas
+                    };
                     console.log(resPas);
-            };
-            
-            $scope.testBut = function(){
-                
-                console.log($scope.firstName);
-                console.log($scope.phone);
-                console.log($scope.email);
                     
-            }
+                    $http(req).then(function successCallback(response) {
+                       
+                    }, function errorCallback(response) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        $scope.feetback = response.status;
+                    });
+            };
+         
             
              
             

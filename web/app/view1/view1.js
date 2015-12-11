@@ -147,6 +147,20 @@ angular.module('myApp.view1', ['ngRoute'])
                //InfoService.seats = passengers;
             };
             
+            $scope.submitAirName = function (airline) {
+                var airl = JSON.stringify({
+                       name : airline
+                    });
+                
+               var req = {
+                        method: 'POST',
+                        url: 'api/flightinfo/name',
+                        headers: {'Content-Type': 'application/json'},
+                        data: airl
+                    };
+                    console.log(airl);
+                    //uste the $http to complete the post 
+            };
             
             
         }); // End of Controller
