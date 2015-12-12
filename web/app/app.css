@@ -10,8 +10,12 @@ ol.list > li{
     margin-bottom: 10px;
     padding-left: 0.5em;
     min-height: 1.5em;
-    border-left: 2px solid #CCCCCC;
+    border-left: 2px solid #0000FF;
 }
+a:link {
+  color: purple }
+a:visited {
+  color: blue }
 
 ol.list > li:before {
     position: absolute;
@@ -23,12 +27,12 @@ ol.list > li:before {
     line-height: 1;
     font-weight: bold;
     text-align: right;
-    color: #464646;
+    color: #0000FF;
  
     content: counter(li-counter);
     counter-increment: li-counter;
     
-    ::-webkit-scrollbar{
+/*    ::-webkit-scrollbar{
   width:0.2em;
 }
 ::-webkit-scrollbar-track{
@@ -47,7 +51,7 @@ ol.list > li:before {
   padding:0;
   background:#7f8c8d;
   animation: responsive 5s infinite ease-in-out;
-}
+}*/
 .box-table{
   font:normal 12px/150% Arial, Helvetica, sans-serif;
   overflow:hidden;

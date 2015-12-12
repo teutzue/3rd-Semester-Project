@@ -61,7 +61,7 @@
             </tr>
         </thead>
         <tbody ng-repeat="airline in airlines">
-            <tr id="{{$index}}" ng-repeat="flight in airline.flights">
+            <tr id="{{$index}}" ng-repeat="flight in airline.flights" >
                 <td><span class ="label label-danger">{{airline.airline}}</span></td>
                 <td>{{flight.flightID}}</td>
                 <td>{{flight.numberOfSeats}}</td>
