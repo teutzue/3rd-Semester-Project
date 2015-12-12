@@ -45,8 +45,8 @@
     <div class="sk-circle11 sk-child"></div>
     <div class="sk-circle12 sk-child"></div>
 </div>
-<div class="container" ng-show="showTable">
-    <table class="table table-striped table-bordered table-hover table-condensed">
+<div class="container" ng-show="showTable" class="box-table">
+    <table class="table table-striped table-bordered table-hover table-condensed" data-fn="contacts" class="rwd-table">
         <thead>
             <tr>
                 <th>Airline</th>
@@ -62,11 +62,11 @@
         </thead>
         <tbody ng-repeat="airline in airlines">
             <tr id="{{$index}}" ng-repeat="flight in airline.flights">
-                <td>{{airline.airline}}</td>
+                <td><span class ="label label-danger">{{airline.airline}}</span></td>
                 <td>{{flight.flightID}}</td>
                 <td>{{flight.numberOfSeats}}</td>
                 <td>{{flight.date| date}}</td>
-                <td>&euro;{{flight.totalPrice}}</td>
+                <td><span class ="badge">&euro;{{flight.totalPrice}}</span></td>
                 <td>{{flight.origin}}</td>
                 <td>{{flight.traveltime}}</td>
                 <td>{{flight.destination}}</td>
