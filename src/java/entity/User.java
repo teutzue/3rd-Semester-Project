@@ -78,6 +78,12 @@ public class User implements Serializable {
         return rolesAsStrings;
     }
 
+    public List<Booking> getListbook() {
+        return listbook;
+    }
+
+    
+    
     public void AddRole(Role role) {
         roles.add(role);
         role.addUser(this);
@@ -87,7 +93,7 @@ public class User implements Serializable {
         return roles;
     }
 
-    public String getEmail(String email) {
+    public String getEmail() {
         return email;
     }
 
@@ -95,7 +101,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getAddress(String address) {
+    public String getAddress() {
         return address;
     }
 
@@ -103,7 +109,7 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public String getCity(String city) {
+    public String getCity() {
         return city;
     }
 
@@ -111,7 +117,7 @@ public class User implements Serializable {
         this.city = city;
     }
 
-    public String getCountry(String country) {
+    public String getCountry() {
         return country;
     }
 
@@ -119,7 +125,7 @@ public class User implements Serializable {
         this.country = country;
     }
 
-    public int getZipCode(int zipCode) {
+    public int getZipCode() {
         return zipCode;
     }
 
