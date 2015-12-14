@@ -7,31 +7,37 @@ package facades;
 
 import deploy.DeploymentConfiguration;
 import entity.User;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
- *
  * @author bo
  */
 public class ReservationsFacade {
-     
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
     public ReservationsFacade() {
     }
-    
-    
-    
-     public User getUserByUserId(String id) {
+
+    public List<User> getReservations() {
+        
         EntityManager em = emf.createEntityManager();
-        try {
-            return em.find(User.class, id);
-        } finally {
-            em.close();
-        }
-    } 
-     
-     
+        
+        Query query = em.createQuery("SELECT u FROM User u");
+        
+        List<User> users = query.getResultList();
+        
+        return users;
+    }
+    
+    public User getReservation(String username) {
+
+        EntityManager em = emf.createEntityManager();
+
+        return em.find(User.class, username);
+    } // End of Method
 } // End of class

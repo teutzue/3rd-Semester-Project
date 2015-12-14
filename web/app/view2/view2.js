@@ -14,7 +14,8 @@ angular.module('myApp.view2', ['ngRoute'])
                 method: 'GET',
                 url: 'api/reservations' + '/' + $rootScope.theUsername
             }).then(function successCallback(response) {
-                $scope.data = response.data.message;
+                $scope.data = response.data;
+                
             }, function errorCallback(res) {
                 $scope.error = res.status + ": " + res.data.statusText;
             });
