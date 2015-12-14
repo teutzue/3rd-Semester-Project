@@ -1,5 +1,137 @@
-<p>This is the partial for view 2.</p>
-<div>
-  <p>Data from server (Users ONLY) <b style="color: darkblue">{{data}}</b></p>
-  {{theUsername}}
+<div class="col-md-9">
+    <h3>Booking informations</h3><br>
+
+    <uib-accordion>
+        <uib-accordion-group is-open="true" heading="Billing Credentials for {{data.firstName}}">
+            <!-- Billing Credentials -->
+            <div class="container">
+                <table class="table table-hover">
+                    <colgroup>
+                        <col width="100px">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th colspan="2">Billing Credentials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>First Name</td>
+                            <td>{{data.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td>{{data.lastName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Country</td>
+                            <td>{{data.country}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{data.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td>{{data.city}}</td>
+                        </tr>
+                        <tr>
+                            <td>zip Code</td>
+                            <td> {{data.zipCode}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>{{data.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{data.email}}</td>
+                        </tr>   
+                    </tbody>
+                </table>
+            </div>
+
+            <uib-accordion>
+                <uib-accordion-group  ng-repeat="booking in data.listbook"  heading="{{booking.Origin}} To {{booking.Destination}}">
+                    <!-- Booking Information -->
+                    <div class="container">
+                        <table class="table table-hover">
+                            <colgroup>
+                                <col width="150px">
+                                <col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Booking Informations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Flight Id</td>
+                                    <td>{{booking.flightID}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Reservee Name</td>
+                                    <td>{{booking.ReserveeName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Origin</td>
+                                    <td>{{booking.Origin}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Destination</td>
+                                    <td>{{booking.Destination}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>{{booking.Date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Flight Time</td>
+                                    <td>{{booking.FlightTime}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Number Of Seats</td>
+                                    <td>{{booking.numberOfSeats}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <uib-accordion>
+                        <uib-accordion-group  ng-repeat="passenger in booking.passengers"  heading="Passenger #{{$index + 1}}">
+                            <!-- Passengers -->
+                            <div class="container">
+                                <table class="table table-hover">
+                                    <colgroup>
+                                        <col width="150px">
+                                        <col>
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Passenger</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>First Name</td>
+                                            <td>{{passenger.firstName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name</td>
+                                            <td>{{passenger.lastName}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+
+                </uib-accordion-group>
+            </uib-accordion>
+
+        </uib-accordion-group>
+    </uib-accordion>            
+
 </div>

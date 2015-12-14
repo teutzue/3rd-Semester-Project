@@ -5,6 +5,8 @@
  */
 package rest;
 
+import facades.ReservationsFacade;
+import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -15,6 +17,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import rest.converter.JsonConverter;
 
 /**
  * REST Web Service
@@ -22,21 +25,37 @@ import javax.ws.rs.core.MediaType;
  * @author bo
  */
 @Path("reservations")
-@RolesAllowed("User")
-public class reservations {
+//@RolesAllowed("User")
+public class Reservations {
+    
+    private ReservationsFacade rf = new ReservationsFacade();
 
     @Context
     private UriInfo context;
 
-    public reservations() {
+    public Reservations() {
     }
-
+    
     @GET
     @Path("/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("username") String username) {
-        System.out.println("username" + username);
-        return "{\"message\" : \"This message was delivered via a REST call accesible by only authenticated USERS\"}";
+    @RolesAllowed("User")
+    public String getReservee(@PathParam("username") String username) {
+        
+        entity.User user = rf.getReservation(username);
+        
+        return JsonConverter.user2Json(user);
     } // End of get
 
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("Admin")
+    public String getReservees() {
+        
+        List<entity.User> users = rf.getReservations();
+        
+        return JsonConverter.users2Json(users);
+    } // End of get
+    
 } // End of class
