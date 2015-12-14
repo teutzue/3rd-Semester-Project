@@ -44,7 +44,6 @@ class GetAirlineInfo implements Callable<String> {
         this.url = url;
     }
 
-
     @Override
     public String call() throws Exception {
         return resultString(url);
@@ -84,27 +83,25 @@ class GetAirlineInfo implements Callable<String> {
             }
 
         } catch (UnknownHostException e) {
-            
+
             //Figure our how to report this
-        }catch (IOException  e) {
-            
+        } catch (IOException e) {
+
             //Figure our how to report this
         }
 
 //       response = response + "]";
-        System.out.println("the response is "+response);
+        System.out.println("the response is " + response);
         return response;
     }
 }
 
 public class DisplayData {
 
-        public List<String> urls = new ArrayList<String>();
-    
+    public List<String> urls = new ArrayList<String>();
 
-    public void addUrls(List<String> url) 
-    {
-        urls=url;
+    public void addUrls(List<String> url) {
+        urls = url;
     }
 
     public List<JSONObject> returnJsonStringAirlineInfo(int threadcount) throws InterruptedException, ExecutionException, JSONException {
@@ -117,24 +114,23 @@ public class DisplayData {
         ExecutorService executor = Executors.newFixedThreadPool(threadcount);
 
         for (int i = 0; i < urls.size(); i++) {
-            System.out.println("urls size "+urls.size());
+            System.out.println("urls size " + urls.size());
             Callable<String> task = new GetAirlineInfo(urls.get(i));
             listwithFutures.add(executor.submit(task));
         }
 
         executor.shutdown();
 
-
         for (Future<String> list1 : listwithFutures) {
 
             org.json.JSONObject json;
             try {
                 json = new org.json.JSONObject(list1.get(10, TimeUnit.SECONDS));
-                System.out.println("the json is "+json.toString());
-                  if (!json.has("httpError")) {
-                listJSON.add(json);
-            }
-                
+                System.out.println("the json is " + json.toString());
+                if (!json.has("httpError")) {
+                    listJSON.add(json);
+                }
+
             } catch (TimeoutException ex) {
                 Logger.getLogger(DisplayData.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -158,12 +154,12 @@ public class DisplayData {
 
 //       for (int i = 0; i <20; i++) {
         DisplayData data = new DisplayData();
-       // data.addUrls("CPH", "STN", "2016-01-14T19:00:00.000Z", 3);
+        // data.addUrls("CPH", "STN", "2016-01-14T19:00:00.000Z", 3);
         List<JSONObject> obj = data.returnJsonStringAirlineInfo(10);
-        System.out.println("the size of the arraylist is "+obj.size());
+        System.out.println("the size of the arraylist is " + obj.size());
         for (int i = 0; i < obj.size(); i++) {
             System.out.println(obj.get(i).toString());
-            
+
         }
 //   }
 

@@ -17,27 +17,20 @@ import javax.persistence.TypedQuery;
 public class UrlFacade {
 
 //    EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
-
     public UrlFacade() {
 
     }
-    
-    
-     EntityManagerFactory emf;
+
+    EntityManagerFactory emf;
     private EntityManager emp;
 
     public UrlFacade(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-
     protected EntityManager getEntityManager() {
         return emp;
     }
-
-  
-    
-    
 
     public List<String> getAllUrl() {
         EntityManager em = emf.createEntityManager();
@@ -53,17 +46,16 @@ public class UrlFacade {
         return results;
 
     }
-    public String findUrl(String nam4e)
-    {
-  
-     EntityManager em = emf.createEntityManager();
 
-     Query query = em.createQuery("SELECT c.url FROM PostUrl c WHERE c.name=:name", String.class);
-     query.setParameter("name", nam4e);
-     String result = (String) query.getSingleResult();
-     return result;
+    public String findUrl(String nam4e) {
+
+        EntityManager em = emf.createEntityManager();
+
+        Query query = em.createQuery("SELECT c.url FROM PostUrl c WHERE c.name=:name", String.class);
+        query.setParameter("name", nam4e);
+        String result = (String) query.getSingleResult();
+        return result;
     }
-    
 
     public Url getUrlByUserId(String id) {
         EntityManager em = emf.createEntityManager();
