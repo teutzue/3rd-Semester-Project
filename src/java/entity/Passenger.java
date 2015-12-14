@@ -22,6 +22,7 @@ public class Passenger implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
     @ManyToOne
     private Booking booking;
 

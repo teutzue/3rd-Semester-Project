@@ -22,48 +22,52 @@ public class BoTester {
     
     public static void main(String[] args) {
         
-        Persistence.generateSchema(DeploymentConfiguration.PU_NAME, null);
-//         UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
-//         List<String> string = cus.getAllUrl();
-//         for (int i = 0; i < string.size(); i++)
-//        {
-//            System.out.println(string.get(i));    
-//        }
+      //  Persistence.generateSchema(DeploymentConfiguration.PU_NAME, null);
+         UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
+         List<String> string = cus.getAllUrl();
+         for (int i = 0; i < string.size(); i++)
+        {
+            System.out.println(string.get(i));    
+        }
         
-//        
-//        Booking book = new Booking();
-//        book.setDate("2016-01-10T19:00:00.000Z");
-//        book.setFlightID("COL3256x100x2016-01-10T19:00:00.000Z");
-//        book.setDestination("London Stansted(STN)");
-//        book.setOrigin("Copenhagen Kastrup(CPH)");
-//        book.setFlightTime(90);
-//        book.setNumberOfSeats(2);
-//        book.setReserveeName("Peter Hansen");
-//        Passenger one = new Passenger("Peter","Peterson");
-//        Passenger two=new Passenger("Jane","Peterson");
-//       
-//           
-//        
-//        book.addPassengers(one);
-//        book.addPassengers(two);
-//        
-//       // book.setUsername("Pesho");
-//    
-//    
-//          EntityManagerFactory factory;
-//          factory = Persistence.createEntityManagerFactory("PU-Local");
-//          
-//          EntityManager em = factory.createEntityManager();
-//       try{
-//          em.getTransaction().begin();
-//       
-//          em.persist(book);
-//          em.getTransaction().commit();
-//       }finally{
-//
-//          em.close();
-//     }
-//        
+        
+        Booking book = new Booking();
+        book.setDate("2016-01-10T19:00:00.000Z");
+        book.setFlightID("COL3256x100x2016-01-10T19:00:00.000Z");
+        book.setDestination("London Stansted(STN)");
+        book.setOrigin("Copenhagen Kastrup(CPH)");
+        book.setFlightTime(90);
+        book.setNumberOfSeats(2);
+        book.setReserveeName("Peter Hansen");
+        Passenger one = new Passenger("carlos","jhsdgf");
+        Passenger two=new Passenger("Bump","hjsdv");
+       
+           
+        
+        book.addPassengers(one);
+        one.setBooking(book);
+        book.addPassengers(two);
+        two.setBooking(book);
+        System.out.println("booking passsenger is "+book.getList().toString());
+        
+       // book.setUsername("Pesho");
+    
+    
+          EntityManagerFactory factory;
+          factory = Persistence.createEntityManagerFactory("PU-Local");
+          
+          EntityManager em = factory.createEntityManager();
+       try{
+          em.getTransaction().begin();
+       
+          em.persist(book);
+          em.persist(one);
+          em.getTransaction().commit();
+       }finally{
+
+          em.close();
+     }
+        
         
     }
     

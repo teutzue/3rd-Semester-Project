@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
  * @author CosticaTeodor
  */
 
-@Path("flightinfo")
+@Path("searchRequest")
 public class SearchReqResource {
     //addSearchReq @Param{ 2 tipuri }
     //getAll @Param {allSRequ}
@@ -25,8 +25,7 @@ public class SearchReqResource {
     @GET
     @Path("/{from}/{to}/{date}/{numTickets}")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces("application/json")
-    public String putSearchRequestComplete(@PathParam("from") String from,
+    public void putSearchRequestComplete(@PathParam("from") String from,
             @PathParam("to") String to,
             @PathParam("date") String date,
             @PathParam("numTickets") int passengernumber){
@@ -37,6 +36,5 @@ public class SearchReqResource {
         sr.setFrom(from);
         sr.setDate(date);
         sr.setNoPassengers(Integer.toString(passengernumber));
-        return "";
     }
 }

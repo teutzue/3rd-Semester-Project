@@ -63,6 +63,39 @@ angular.module('myApp.view6_create_passengers', ['ngRoute', 'ui.bootstrap'])
                         // or server returns response with an error status.
                         $scope.feetback = response.status;
                     });
+                    
+                    var req = {
+                        method: 'POST',
+                        url: 'api/demouser',
+                        headers: {'Content-Type': 'application/json'},
+                        data: credential
+                    };
+                    
+                    $http(req).then(function successCallback(response) {
+                        // this callback will be called asynchronously
+                        // when the response is available
+                        if (response.data.isSaved === "yes") {
+                            $scope.userName = "";
+                            $scope.password = "";
+                            $scope.password2 = "";
+                            $scope.firstName = "";
+                            $scope.lastName = "";
+                            $scope.email = "";
+                            $scope.address = "";
+                            $scope.city = "";
+                            $scope.country = "";
+                            $scope.zipCode = "";
+                            $scope.phone = "";
+                            $scope.isSaved = response.data.isSaved;
+                            $scope.feetback = response.data.message;
+                        } else {
+                            $scope.feetbackError = response.data.message;
+                        }
+                    }, function errorCallback(response) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        $scope.feetback = response.status;
+                    });
                 } // End of if-passworld
 
             }; // End of submit

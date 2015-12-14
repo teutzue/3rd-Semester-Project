@@ -122,18 +122,14 @@ public class Booking implements Serializable {
     @OneToMany(mappedBy = "booking",cascade=CascadeType.ALL)
     @JoinColumn  
     List<Passenger> list;
-    
-//    @OneToMany(cascade=CascadeType.PERSIST)
-//    @JoinColumn      
-//    List<Passenger> list;
-//  
+
     public void addPassengers(Passenger cc) 
     {
         if (list == null) {
             list = new ArrayList<>();
         }
         list.add(cc);
-        cc.setBooking(this);
+        //cc.setBooking(this);
         
     }
 

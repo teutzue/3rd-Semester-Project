@@ -154,6 +154,8 @@ public class FlightinfoResource {
     public String postPerson(@PathParam("name") String name,@PathParam("username") String username, String jsonAsString) throws MalformedURLException, IOException 
     {
         
+        System.out.println("the username is "+username);
+        
          EntityManagerFactory factory;
          factory = Persistence.createEntityManagerFactory("PU-Local");  
          
