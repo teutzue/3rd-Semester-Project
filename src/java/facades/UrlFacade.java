@@ -51,7 +51,7 @@ public class UrlFacade {
 
         EntityManager em = emf.createEntityManager();
 
-        Query query = em.createQuery("SELECT c.url FROM PostUrl c WHERE c.name=:name", String.class);
+        Query query = em.createQuery("SELECT c.url FROM PostUrl c WHERE c.name=:name");
         query.setParameter("name", nam4e);
         String result = (String) query.getSingleResult();
         return result;
