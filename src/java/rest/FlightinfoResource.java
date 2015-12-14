@@ -37,6 +37,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import org.json.JSONException;
 import org.json.JSONObject;
+import static org.json.XMLTokener.entity;
 
 /**
  * REST Web Service
@@ -147,18 +148,29 @@ public class FlightinfoResource {
 
     
     @POST
-    @Path("/{name}/")
+    @Path("/{name}/{username}")
     @Consumes("application/json")
     @Produces("application/json")
-    public String postPerson(@PathParam("name") String name, String jsonAsString) throws MalformedURLException, IOException 
+    public String postPerson(@PathParam("name") String name,@PathParam("username") String username, String jsonAsString) throws MalformedURLException, IOException 
     {
+        
+         EntityManagerFactory factory;
+         factory = Persistence.createEntityManagerFactory("PU-Local");  
+         
          Gson gson = new Gson();  
          JsonObject json = new JsonObject();
+         
+        JsonObject person = new JsonParser().parse(jsonAsString).getAsJsonObject();
+        System.out.println("the json returned "+ person.toString());
+      //   return person.toString();
+         
        UrlFacade urlr= new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
         System.out.println("name "+name);
         String result = urlr.findUrl(name);
         System.out.println("the url is "+result);
         url = result;
+       
+        
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
         con.setRequestProperty("Content-Type", "application/json;");
         con.setRequestProperty("Accept", "application/json");
@@ -180,10 +192,11 @@ public class FlightinfoResource {
         System.out.println(con.getResponseCode());
         System.out.println(con.getResponseMessage());
         Booking book = JSONConverter.getBookingFromJSON(response);
-        System.out.println("The book constructed is "+book.toString());       
-         EntityManagerFactory factory;
-         factory = Persistence.createEntityManagerFactory("PU-Local");         
+        System.out.println("The book constructed is "+book.toString());  
+        
           EntityManager em = factory.createEntityManager();
+          entity.User user = em.find( entity.User.class ,username);
+          book.setUser(user);
        try{
           em.getTransaction().begin();    
           em.persist(book);

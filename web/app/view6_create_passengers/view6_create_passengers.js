@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
+angular.module('myApp.view6_create_passengers', ['ngRoute', 'ui.bootstrap'])
 
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/view6_create_passengers', {
@@ -9,7 +9,7 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                 });
             }])
 
-        .controller('view6_create_passengersCtrl', function ($scope, $http, InfoService,$rootScope) {
+        .controller('view6_create_passengersCtrl', function ($scope, $http, InfoService, $rootScope) {
 
             $scope.wrongPs = "visibility: hidden";
             $scope.missingPS = "visibility: hidden";
@@ -46,13 +46,13 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                             $scope.password = "";
                             $scope.password2 = "";
                             $scope.firstName = "";
-                            $scope.lastName="";
-                            $scope.email="";
-                            $scope.address="";
-                            $scope.city="";
-                            $scope.country="";
-                            $scope.zipCode="";
-                            $scope.phone="";
+                            $scope.lastName = "";
+                            $scope.email = "";
+                            $scope.address = "";
+                            $scope.city = "";
+                            $scope.country = "";
+                            $scope.zipCode = "";
+                            $scope.phone = "";
                             $scope.isSaved = response.data.isSaved;
                             $scope.feetback = response.data.message;
                         } else {
@@ -77,7 +77,8 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                 }
             }; // End of Style
 
-            $scope.Focus = function () {
+            $scope.Focus = function ()
+            {
                 $scope.feetback = "";
                 $scope.feetbackError = "";
                 $scope.wrongPs = "visibility: hidden";
@@ -117,22 +118,23 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                 }
                 return true;
             };
-            
+
             $scope.seats = [];
-            for (var i = 0; i < InfoService.seats-1; i++) {
+            for (var i = 0; i < InfoService.seats - 1; i++) {
                 $scope.seats.push(i);
             }
             $scope.passArr = [];
-  
-            
+
+
             $scope.submitRes = function () {
                 $http({
-                    url: 'api/flightinfo/'+$rootScope.rsBooking.airline,
+                    url: 'api/flightinfo/'+$rootScope.rsBooking.airline+'/'+$scope.userName,
 //                    params:{"name": $rootScope.rsBooking.airline},
                     method: 'POST',
 //                    data: {data : bookingInfo, name: $rootScope.rsBooking.airline},
                     data: JSON.stringify({
-
+                        
+     
    "flightID":$rootScope.rsBooking.flightID,
 
    "numberOfSeats": $scope.passArr.length,
@@ -151,9 +153,63 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                         .then(function (response) {
                             $scope.isItSaved = response.data;
                              console.log( $scope.isItSaved.info);
+                             
+                             
+                             
                         },
                                 function (response) { // optional
                                     alert("something went wrong in POst");
                                 });
             };
+
+
+
+//            $scope.submitRes = function () {
+//
+//
+//                //   if (checkPassword($scope.password, $scope.password2) & checkUsername($scope.userName)) { 
+//
+//                $http({
+//                    url: 'api/flightinfo/' + $rootScope.rsBooking.airline,
+////                    params:{"name": $rootScope.rsBooking.airline},
+//                    method: 'POST',
+////                    data: {data : bookingInfo, name: $rootScope.rsBooking.airline},
+//                    data: JSON.stringify({
+//                        "username": $scope.userName,
+//                        "password": $scope.password,
+//                        "firstName": $scope.firstName,
+//                        "lastName": $scope.lastName,
+//                        "email": $scope.email,
+//                        "address": $scope.address,
+//                        "city": $scope.city,
+//                        "country": $scope.country,
+//                        "zipCode": $scope.zipCode,
+//                        "phone": $scope.phone,
+//                        "flightID": $rootScope.rsBooking.flightID,
+//                        "numberOfSeats": $scope.passArr.length,
+//                        "ReserveeName": $scope.firstName,
+//                        "ReservePhone": $scope.phone,
+//                        "ReserveeEmail": $scope.email,
+//                        "Passengers": $scope.passArr
+//
+//                    }),
+//                    headers: {'Content-Type': 'application/json'}
+//                })
+//                        .then(function (response) {
+//                            //  $scope.isItSaved = response.data;
+//                            //   console.log( $scope.isItSaved.info);
+//                            //i guess i need to make them empty
+//
+//                        },
+//                                function (response) { // optional
+//                                    alert("something went wrong in POst");
+//                                });
+//                // }
+//            };
+//
+
+
+
+
+
         }); // End of controller
