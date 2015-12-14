@@ -1,5 +1,6 @@
 package deploy;
 
+import entity.PostUrl;
 import entity.Role;
 import entity.Url;
 import entity.User;
@@ -43,6 +44,9 @@ public class DeploymentConfiguration implements ServletContextListener {
       }
       Role userRole = new Role("User");
       Role adminRole = new Role("Admin");
+      PostUrl url = new PostUrl();
+      url.setName("AngularJS Airline");
+      url.setUrl("http://angularairline-plaul.rhcloud.com/api/flightreservation/");
       Url url1 = new Url();
       url1.setName("AngularJS Airline");
       url1.setUrl("http://angularairline-plaul.rhcloud.com/api/flightinfo/");
@@ -64,6 +68,7 @@ public class DeploymentConfiguration implements ServletContextListener {
         em.persist(adminRole);
         em.persist(url1);
         em.persist(url2);
+        em.persist(url);
         em.persist(user);
         em.persist(admin);
         em.persist(both);

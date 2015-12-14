@@ -46,7 +46,7 @@ import org.json.JSONObject;
 @Path("flightinfo")
 public class FlightinfoResource {
 
-//    private GetTheAirlineInfo get = new GetTheAirlineInfo();
+
     DisplayData data = new DisplayData();
    String url="";
     @Context
@@ -55,28 +55,6 @@ public class FlightinfoResource {
     public FlightinfoResource() {
     }
 
-    // End of Get
-//    @GET
-//    @Path("/{from}/{to}/{date}/{numTickets}")
-//    @Produces(MediaType.APPLICATION_JSON){
-//    public String getFromTo(
-//            @PathParam("from") String from,
-//            @PathParam("to") String to,
-//            @PathParam("date") String date,
-//            @PathParam("numTickets") String tickets
-//    ) {
-//
-//        System.out.println(
-//        
-//                from + "\n" +
-//                to + "\n" +
-//                date + "\n" +
-//                tickets + "\n" 
-//        
-//        );
-//        
-//        return "";
-//    } // End of Get
     @GET
     @Path("/{from}/{to}/{date}/{numTickets}")
     @Produces("application/json")
@@ -124,56 +102,6 @@ public class FlightinfoResource {
         return output;
 
     }
-      @GET
-    @Path("allidiots")
-    @Produces("application/json")
-    public String getUserInfo( )  {
-
-     
-        
-        UserFacade cus = new UserFacade();
-        List<String> usernames = cus.getUserNames();
-//          for (int i = 0; i <usernames.size() ; i++) 
-//          {
-//              List<Booking> bookinfoforuser = 
-//          }
-        
-        
-//      List<String> newturl = new  ArrayList<>();
-//      List<String> listurl = cus.getAllUrl();
-//        for (int i = 0; i < listurl.size(); i++)
-//        {
-//            String url = listurl.get(i) + from + "/" + to + "/" + date + "/" + passengernumber;
-//            System.out.println("the url is "+url);
-//            newturl.add(url);
-//        }
-//        data.addUrls(newturl);
-//        
-//        Gson gson = new Gson();
-//        List<JSONObject> list = data.returnJsonStringAirlineInfo(10);
-//
-//        String output = "";
-//        if (list.size() > 1) {
-//            output += "[";
-//            output += list.get(0).toString() + ",";
-//            for (int i = 1; i < list.size(); i++) {
-//                output += list.get(i).toString();
-//            }
-//            output += "]";
-//        } else {
-//            output += "[";
-//            for (int i = 0; i < list.size(); i++) {
-//
-//                output += list.get(i).toString();
-//            }
-//            output += "]";
-//        }
-//
-//        System.out.println(output);
-//        return output;
-        return null;
-
-    }
      
     @GET
     @Produces("application/json")
@@ -216,18 +144,21 @@ public class FlightinfoResource {
         return output;
 
     }
+
     
-     @POST
+    @POST
+    @Path("/{name}/")
     @Consumes("application/json")
     @Produces("application/json")
-    public String postPerson(String jsonAsString) throws MalformedURLException, IOException 
+    public String postPerson(@PathParam("name") String name, String jsonAsString) throws MalformedURLException, IOException 
     {
          Gson gson = new Gson();  
          JsonObject json = new JsonObject();
-        
-       
-    // String url = "http://angularairline-plaul.rhcloud.com/api/flightreservation/";
-     
+       UrlFacade urlr= new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
+        System.out.println("name "+name);
+        String result = urlr.findUrl(name);
+        System.out.println("the url is "+result);
+        url = result;
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
         con.setRequestProperty("Content-Type", "application/json;");
         con.setRequestProperty("Accept", "application/json");
@@ -248,26 +179,17 @@ public class FlightinfoResource {
         System.out.println(response);
         System.out.println(con.getResponseCode());
         System.out.println(con.getResponseMessage());
-     
-        
         Booking book = JSONConverter.getBookingFromJSON(response);
-        // Booking book = JSONConverter.getBookingFromJSON(response);
-        System.out.println("The book constructed is "+book.toString());
-        
+        System.out.println("The book constructed is "+book.toString());       
          EntityManagerFactory factory;
-          factory = Persistence.createEntityManagerFactory("PU-Local");
-          
+         factory = Persistence.createEntityManagerFactory("PU-Local");         
           EntityManager em = factory.createEntityManager();
        try{
-          em.getTransaction().begin();
-       
+          em.getTransaction().begin();    
           em.persist(book);
-          em.getTransaction().commit();
-          
-          
+          em.getTransaction().commit();        
          json.addProperty("info", "Book Saved");
-        return gson.toJson(json);
-          
+        return gson.toJson(json);      
        }catch(Exception e)
         {
             json.addProperty("info", "Not Booked");
@@ -277,32 +199,7 @@ public class FlightinfoResource {
 
           em.close();
      }
-        
-        
-        
+     
     }
-    
-    @POST
-    @Path("name")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public String postAirline(String jsonAsString) throws MalformedURLException, IOException {
-        Gson gson = new Gson();
-        JsonObject json = new JsonObject();
-
-        JsonObject nameAirline = new JsonParser().parse(jsonAsString).getAsJsonObject();
-        System.out.println("the nameAirline is " + nameAirline.toString());
-
-        String name = nameAirline.get("name").getAsString();
-        UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
-        url = cus.findUrl(name);
-        System.out.println("the url is " + url);
-        
-       // return "bla".toJson();
-          json.addProperty("info", url);
-          return gson.toJson(json);
-    }
-    
-//
 
 } // End of Class

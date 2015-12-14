@@ -9,7 +9,7 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                 });
             }])
 
-        .controller('view6_create_passengersCtrl', function ($scope, $http, InfoService) {
+        .controller('view6_create_passengersCtrl', function ($scope, $http, InfoService,$rootScope) {
 
             $scope.wrongPs = "visibility: hidden";
             $scope.missingPS = "visibility: hidden";
@@ -123,50 +123,37 @@ angular.module('myApp.view6_create_passengers', ['ngRoute','ui.bootstrap'])
                 $scope.seats.push(i);
             }
             $scope.passArr = [];
+  
             
             $scope.submitRes = function () {
-                 var resPas = JSON.stringify({
-                        flightID:"Colasdflaksjfdasdf",//GET IT FROM THE TABLE
-                        numberOfSeats: $scope.passArr.length,
-                        ReserveeName: $scope.firstName,
-                        ReservePhone: $scope.phone,
-                        ReserveeEmail: $scope.email,
-                        Passengers : $scope.passArr
-                        
-                    });
-                    console.log(resPas);
-            };
-            
-            $scope.testBut = function(){
-                
-                console.log($scope.firstName);
-                console.log($scope.phone);
-                console.log($scope.email);
-                    
-            }
-            
-             
-            
-            
-            
-            
-            //-----------------------------------------------
-//            var checkFirstName = function (firstName) {
-//
-//                if ((angular.isUndefined(firstName)) | (firstName === "")) {
-//                    $scope.feetbackError = "Missing First Name!";
-//                    return false;
-//                }
-//                return true;
-//            };
-//
-//            var checkLastName = function (lastName) {
-//
-//                if ((angular.isUndefined(lastName)) | (lastName === "")) {
-//                    $scope.feetbackError = "Missing Last Name";
-//                    return false;
-//                }
-//                return true;
-//            };
+                $http({
+                    url: 'api/flightinfo/'+$rootScope.rsBooking.airline,
+//                    params:{"name": $rootScope.rsBooking.airline},
+                    method: 'POST',
+//                    data: {data : bookingInfo, name: $rootScope.rsBooking.airline},
+                    data: JSON.stringify({
 
+   "flightID":$rootScope.rsBooking.flightID,
+
+   "numberOfSeats": $scope.passArr.length,
+
+   "ReserveeName":  $scope.firstName,
+
+   "ReservePhone": $scope.phone,
+
+   "ReserveeEmail":$scope.email,
+
+   "Passengers": $scope.passArr
+
+}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                        .then(function (response) {
+                            $scope.isItSaved = response.data;
+                             console.log( $scope.isItSaved.info);
+                        },
+                                function (response) { // optional
+                                    alert("something went wrong in POst");
+                                });
+            };
         }); // End of controller
