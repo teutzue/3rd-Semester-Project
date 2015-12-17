@@ -1,151 +1,168 @@
+<!--<div class="container-fluid" style="margin-top: 5em; margin-bottom: 5em">-->
+<div class="container-fluid" style="margin-top: 5em; margin-bottom: 7em;min-height: 25em">
+    <div class="row">
 
-
-<h1>Booking</h1>
-<form id="registerForm">
-    <!---form--->           <div class="form-group">
-        <!---input width--->    <div class="col-xs-6">
-            <label for="InputName">First Name</label>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-focus="Focus()" ng-model="firstName"  placeholder="Enter First Name" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-            </div>
-            <br>
-
-            <label for="InputName">Last Name</label>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-focus="Focus()" ng-model="lastName" placeholder="Enter Last Name" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-            </div>
-
-
-
-            <!--------------------------------------separator---------------------------------------------------------------> <hr>
-        </div>
-    </div>
-    <div class="form-group">
+        <div class="col-xs-3"></div>
         <div class="col-xs-6">
-            <label for="InputName">Username</label>
-            <div class="input-group">
-                <input type="text" class="form-control"  ng-focus="Focus()" ng-model="userName"  placeholder="Enter Username" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                <span style="{{Style(isSaved)}}">{{feetbackError}}</span>
-            </div>
-            <br>
-            <label for="InputPassword">Enter Password</label>
-            <div class="input-group">
-                <input type="password" class="form-control" ng-focus="Focus()" ng-model="password" placeholder="Enter Password" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                <span style="{{missingPS}}; color: red">Missing Password</span>
-            </div>
 
-            <label for="InputPassword">Re-Enter Password</label>
-            <div class="input-group">
-                <input type="password" class="form-control" name="re-password" ng-focus="Focus()" ng-model="password2" placeholder="Re-Enter Password" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                <span style="{{wrongPs}}; color: red">Wrong! Retype Password</span>
-            </div>
-            <!--------------------------------------separator---------------------------------------------------------------> <hr>
-        </div>
 
-    </div> 
+            <h2>Booking</h2>
 
-    <div class="form-group"> 
-        <div class="col-xs-12">
-            <label for="InputEmail">Enter Email</label>
-            <div class="input-group">
-                <input type="email" class="form-control" ng-focus="Focus()" ng-model="email" placeholder="Enter Email" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-            </div>
-            <!----------------------------break-------------------------------------------------------------> <br>
-        </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-xs-12">
-            <label for="InputStreetName">Address</label>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-focus="Focus()" ng-model="address" name placeholder="Enter Street Name and Number" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-            </div>
-            <!----------------------------break-------------------------------------------------------------> <br> 
-        </div>                     
-    </div>
-
-    <div class="form-group">
-        <div class="col-xs-12">
-            <label for="InputCity">City</label>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-focus="Focus()" ng-model="city" name="city" placeholder="Enter City" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-            </div>
-            <!----------------------------break-------------------------------------------------------------> <br> 
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-xs-12">
-
-            <label for="InputZipCode">Zip Code</label>
-            <div class="input-group">
-                <input type="number" class="form-control" ng-focus="Focus()" ng-model="zipCode" name="zipCode" placeholder="Enter Zip Code" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-            </div>
-            <!----------------------------break-------------------------------------------------------------> <br>                     
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-xs-12">
-            <label for="InputCountry">Country</label>
-            <div class="input-group">
-                <input type="text" class="form-control" ng-focus="Focus()" ng-model="country" name="country" placeholder="Enter Province" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-            </div>
-            <!----------------------------break-------------------------------------------------------------> <br>                     
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-xs-12">
-            <label for="InputPhone">Phone</label>
-            <div class="input-group">
-                <input type="number" class="form-control" ng-focus="Focus()" ng-model="phone" name="phone" placeholder="Enter Phone" required>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
-            </div>
-            <!----------------------------break-------------------------------------------------------------> <br>                     
-        </div>
-    </div>
-</form>
-<div >
-    <uib-accordion>
-        <uib-accordion-group heading="Passenger {{value + 1}}"  ng-repeat="(key,value) in seats">
-            <div class="modal-body">
-                <form id="registerForm">
-                    <!---form--->           <div class="form-group">
-                        <!---input width--->    <div class="col-xs-6">
-                            <label for="InputName">First Name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" ng-focus="Focus()" ng-model="passArr[key].firstName" name="firstName" placeholder="Enter First Name" required>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                            </div>
-                            <!--------------------------------------separator---------------------------------------------------------------> <hr>
+            <form id="registerForm">
+                <!---form--->           <div class="form-group">
+                    <!---input width--->    <div class="col-xs-6">
+                        <label for="InputName">First Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-focus="Focus()" ng-model="firstName"  placeholder="Enter First Name" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                         </div>
+                        <br>
+
+                        <label for="InputName">Last Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-focus="Focus()" ng-model="lastName" placeholder="Enter Last Name" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+
+
+
+                        <!--------------------------------------separator---------------------------------------------------------------> <hr>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-6">
-
-                            <label for="InputName">Last Name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" ng-focus="Focus()" ng-model="passArr[key].lastName" name="lastName" placeholder="Enter Last Name" required>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                            </div>
-                            <!--------------------------------------separator---------------------------------------------------------------> <hr>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="InputName">Username</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control"  ng-focus="Focus()" ng-model="userName"  placeholder="Enter Username" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            <span style="{{Style(isSaved)}}">{{feetbackError}}</span>
                         </div>
-                    </div> 
-            </div>
+                        <br>
+                        <label for="InputPassword">Enter Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" ng-focus="Focus()" ng-model="password" placeholder="Enter Password" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            <span style="{{missingPS}}; color: red">Missing Password</span>
+                        </div>
+
+                        <label for="InputPassword">Re-Enter Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="re-password" ng-focus="Focus()" ng-model="password2" placeholder="Re-Enter Password" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            <span style="{{wrongPs}}; color: red">Wrong! Retype Password</span>
+                        </div>
+                        <!--------------------------------------separator---------------------------------------------------------------> <hr>
+                    </div>
+
+                </div> 
+
+                <div class="form-group"> 
+                    <div class="col-xs-12">
+                        <label for="InputEmail">Enter Email</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" ng-focus="Focus()" ng-model="email" placeholder="Enter Email" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                        <!----------------------------break-------------------------------------------------------------> <br>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label for="InputStreetName">Address</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-focus="Focus()" ng-model="address" name placeholder="Enter Street Name and Number" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                        <!----------------------------break-------------------------------------------------------------> <br> 
+                    </div>                     
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label for="InputCity">City</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-focus="Focus()" ng-model="city" name="city" placeholder="Enter City" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                        <!----------------------------break-------------------------------------------------------------> <br> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+
+                        <label for="InputZipCode">Zip Code</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" ng-focus="Focus()" ng-model="zipCode" name="zipCode" placeholder="Enter Zip Code" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
+                        </div>
+                        <!----------------------------break-------------------------------------------------------------> <br>                     
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label for="InputCountry">Country</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-focus="Focus()" ng-model="country" name="country" placeholder="Enter Province" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
+                        </div>
+                        <!----------------------------break-------------------------------------------------------------> <br>                     
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label for="InputPhone">Phone</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" ng-focus="Focus()" ng-model="phone" name="phone" placeholder="Enter Phone" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
+                        </div>
+                        <!----------------------------break-------------------------------------------------------------> <br>                     
+                    </div>
+                </div>
             </form>
+            <div >
+                <uib-accordion>
+                    <uib-accordion-group heading="Passenger {{value + 1}}"  ng-repeat="(key,value) in seats">
+                        <div class="modal-body">
+                            <form id="registerForm">
+                                <!---form--->           <div class="form-group">
+                                    <!---input width--->    <div class="col-xs-6">
+                                        <label for="InputName">First Name</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-focus="Focus()" ng-model="passArr[key].firstName" name="firstName" placeholder="Enter First Name" required>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                        </div>
+                                        <!--------------------------------------separator---------------------------------------------------------------> <hr>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+
+                                        <label for="InputName">Last Name</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-focus="Focus()" ng-model="passArr[key].lastName" name="lastName" placeholder="Enter Last Name" required>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                                        </div>
+                                        <!--------------------------------------separator---------------------------------------------------------------> <hr>
+                                    </div>
+                                </div> 
+                        </div>
+                        </form>
+                        </div>
+                    </uib-accordion-group>
+                    <input class="btn btn-primary" type="button" value="submit" ng-click="submitRes();
+                    submit()">
+                    <p><span class ="label label-danger">{{isItSaved.info}}</span></p>
+                </uib-accordion>
             </div>
-        </uib-accordion-group>
-        <input type="button" value="submit" ng-click="submitRes();submit()">
-    </uib-accordion>
+
+
+
+        </div>
+        <div class="col-xs-3"></div>
+    </div>
 </div>

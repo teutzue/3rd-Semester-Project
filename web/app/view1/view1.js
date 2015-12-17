@@ -20,6 +20,7 @@ angular.module('myApp.view1', ['ngRoute', 'ngAnimate'])
             $scope.myInterval = 5000;
             $scope.noWrapSlides = false;
             var slides = $scope.slides = [];
+//            var slides = $scope.slides = [];
             $scope.addSlide = function () {
                 slides.push({
                     image: images[index],
@@ -30,12 +31,8 @@ angular.module('myApp.view1', ['ngRoute', 'ngAnimate'])
             for (var i = 0; i < 4; i++) {
                 index = i;
                 $scope.addSlide();
-            }
+            }          
             // ---------------------------------------
-
-
-
-
 
 
             $scope.showSpinner = false;
@@ -148,7 +145,7 @@ angular.module('myApp.view1', ['ngRoute', 'ngAnimate'])
             }; // End of getData
 
             $scope.bookTicket = function (airline, flight) {
-                alert("I am in the function");
+                
                 var booking = {
                     airline: airline,
                     flightID: flight.flightID,
