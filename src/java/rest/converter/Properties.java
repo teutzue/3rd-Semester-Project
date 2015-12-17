@@ -40,9 +40,7 @@ public class Properties {
     public static final String PASSENGER_LAST_NAME = "lastName";
     
     //SearchRequest properties
-    public static final String SEARCH_REQUEST_FROM = "from";
     public static final String SEARCH_REQUEST_TO = "to";
-    public static final String SEARCH_REQUEST_Date = "Date_SR";
-    public static final String SEARCH_REQUEST_NO_Passengers = "noPassengers";
+    public static final String SEARCH_REQUEST_NO_Passengers = "noHits";
     
 } // End of Class

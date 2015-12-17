@@ -82,9 +82,6 @@ public class FlightinfoResource {
         SearchRequest sr = new SearchRequest();
         
         sr.setTo(to);
-        sr.setFrom(from);
-        sr.setDate(date);
-        sr.setNoPassengers(Integer.toString(passengernumber));
         src.addSearchRequest(sr);
         
         Gson gson = new Gson();

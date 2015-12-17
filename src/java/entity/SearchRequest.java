@@ -18,10 +18,9 @@ public class SearchRequest implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
-    private String from_;
+    private String noHits;
     private String to_;
-    private String date_;
-    private String noPassengers;
+    
 
     public int getId() {
         return id;
@@ -31,36 +30,20 @@ public class SearchRequest implements Serializable {
         this.id = id;
     }
 
-    public String getFrom() {
-        return from_;
-    }
-
-    public void setFrom(String from) {
-        this.from_ = from;
-    }
-
     public String getTo() {
         return to_;
     }
 
-    public void setTo(String to) {
-        this.to_ = to;
+    public void setTo(String to_) {
+        this.to_ = to_;
     }
 
-    public String getDate() {
-        return date_;
+    public String getNoHits() {
+        return noHits;
     }
 
-    public void setDate(String date) {
-        this.date_ = date;
-    }
-
-    public String getNoPassengers() {
-        return noPassengers;
-    }
-
-    public void setNoPassengers(String noPassengers) {
-        this.noPassengers = noPassengers;
+    public void setNoHits(String noHits) {
+        this.noHits = noHits;
     }
 
     @Override

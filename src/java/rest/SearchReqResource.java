@@ -21,7 +21,7 @@ public class SearchReqResource {
     
     @GET
     public String GetAllReq(){
-        List<entity.SearchRequest> searches = srf.getAllSearchRequests();
+        List<Object> searches = srf.getAllSearchRequests();
         
         return JsonConverter.serches2Json(searches);
     }

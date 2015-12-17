@@ -27,13 +27,12 @@ public class JsonConverter {
 
     private static Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
 
-    private static JsonObject searches2JsonObj(entity.SearchRequest sr) {
+    private static JsonObject searches2JsonObj(Object sr) {
         JsonObject joSearch = new JsonObject();
 
-        joSearch.addProperty(Properties.SEARCH_REQUEST_FROM, sr.getFrom());
-        joSearch.addProperty(Properties.SEARCH_REQUEST_TO, sr.getTo());
-        joSearch.addProperty(Properties.SEARCH_REQUEST_Date, sr.getDate());
-        joSearch.addProperty(Properties.SEARCH_REQUEST_NO_Passengers, sr.getNoPassengers());
+        
+//        joSearch.addProperty(Properties.SEARCH_REQUEST_NO_Passengers, sr.getNoHits());
+//        joSearch.addProperty(Properties.SEARCH_REQUEST_TO, sr.getTo());
 
         return joSearch;
     }
@@ -107,14 +106,13 @@ public class JsonConverter {
         return jaUsers.toString();
     } // End of users2Json
 
-    //Search
-    public static String serches2Json(List<entity.SearchRequest> searches) {
-
-        JsonArray jaUsers = new JsonArray();
-        for (SearchRequest sr : searches) {
-            jaUsers.add(searches2JsonObj(sr));
+    //Searches
+    public static String serches2Json(List<Object> searches) {
+        JsonArray jaSearches = new JsonArray();
+        for (Object sr : searches) {
+            jaSearches.add(searches2JsonObj(sr));
         }
-        return jaUsers.toString();
+        return jaSearches.toString();
     }
 
 } // End of Class

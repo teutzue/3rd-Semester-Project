@@ -30,12 +30,15 @@ public class SearchRequestFacade {
         return searchReq;
     }
 
-    public List<entity.SearchRequest> getAllSearchRequests() {
+    public List<Object> getAllSearchRequests() {
         EntityManager em = emf.createEntityManager();
-
-        Query query = em.createQuery("Select c FROM SearchRequest c");
         
-        List<entity.SearchRequest> results = null;
+        Query query = em.createQuery("SELECT DISTINCT e.to_, COUNT(e.to_) \n"
+                + "FROM SearchRequest e \n"
+                + "GROUP BY e.to_ \n"
+                + "ORDER BY COUNT(e.to_) DESC");
+        List<Object> results = null;
+       
         try {
             results = query.getResultList();
         } catch (Exception e) {
