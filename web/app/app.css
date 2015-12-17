@@ -10,6 +10,67 @@ ol.list > li{
     margin-bottom: 10px;
     padding-left: 0.5em;
     min-height: 1.5em;
+    border-left: 2px solid #CCCCCC;
+}
+
+ol.list > li:before {
+    position: absolute;
+    top: 0;
+    left: -1em;
+    width: 0.8em;
+     
+    font-size: 1.5em;
+    line-height: 1;
+    font-weight: bold;
+    text-align: right;
+    color: #464646;
+ 
+    content: counter(li-counter);
+    counter-increment: li-counter;
+} 
+
+
+// Added by Bo
+
+.btn-round {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+} 
+
+.btn-round.btn-lg {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-round.btn-sm {
+    width: 34px;
+    height: 34px;
+}
+
+.btn-round.btn-xs {
+    width: 24px;
+    height: 24px;
+}
+
+
+
+
+
+// delete me ----------------
+
+/*ol.list {
+    list-style-type: none;
+    margin: 0;
+    margin-left: 3em;
+    padding: 0;  
+    counter-reset: li-counter;
+}
+ol.list > li{
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 0.5em;
+    min-height: 1.5em;
     border-left: 2px solid #0000FF;
 }
 a:link {
@@ -32,7 +93,7 @@ ol.list > li:before {
     content: counter(li-counter);
     counter-increment: li-counter;
     
-/*    ::-webkit-scrollbar{
+    ::-webkit-scrollbar{
   width:0.2em;
 }
 ::-webkit-scrollbar-track{
@@ -51,7 +112,7 @@ ol.list > li:before {
   padding:0;
   background:#7f8c8d;
   animation: responsive 5s infinite ease-in-out;
-}*/
+}
 .box-table{
   font:normal 12px/150% Arial, Helvetica, sans-serif;
   overflow:hidden;
@@ -116,4 +177,4 @@ ol.list > li:before {
  http://elvery.net/demo/responsive-tables/  
 
     
-}
+}*/

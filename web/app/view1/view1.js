@@ -1,9 +1,11 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+//angular.module('myApp.view1', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
+angular.module('myApp.view1', ['ngRoute', 'ngAnimate'])
 
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/view1', {
+                    
                     templateUrl: 'app/view1/view1.html',
                     controller: 'View1Ctrl',
                     controllerAs: 'ctrl'
@@ -11,6 +13,30 @@ angular.module('myApp.view1', ['ngRoute'])
             }])
 
         .controller('View1Ctrl', function ($http, $scope, dateFilter, $rootScope, InfoService) {
+
+            // --------------------------------
+            var images = ['app/view1/_img/image1.jpg', 'app/view1/_img/image2.jpg', 'app/view1/_img/image3.jpg', 'app/view1/_img/image4.jpg'];
+            var index = 0;
+            $scope.myInterval = 5000;
+            $scope.noWrapSlides = false;
+            var slides = $scope.slides = [];
+            $scope.addSlide = function () {
+                slides.push({
+                    image: images[index],
+                    text: ['Love New York', 'Coffee in Paris', 'History in Rome', 'Culture and Berlin'][index]
+                    
+                });
+            };
+            for (var i = 0; i < 4; i++) {
+                index = i;
+                $scope.addSlide();
+            }
+            // ---------------------------------------
+
+
+
+
+
 
             $scope.showSpinner = false;
             $scope.feedBack = "";
@@ -55,17 +81,17 @@ angular.module('myApp.view1', ['ngRoute'])
                     $scope.date = new Date(year, month, day, 1);
 
                     if ($scope.dataTo.repeatSelectTo === null) {
-                        console.log($scope.dataFrom.repeatSelectFrom );
+                        console.log($scope.dataFrom.repeatSelectFrom);
                         $http({
                             method: 'GET',
                             url: 'api/flightinfo/'
                                     + $scope.dataFrom.repeatSelectFrom + '/'
                                     + $scope.date.toISOString() + '/'
                                     + $scope.passengers
-                            
+
 
                         }).then(function successCallback(response) {
-                        console.log($scope.dataFrom.repeatSelectFrom + " " + $scope.date.toISOString() + " " + $scope.passengers);
+                            console.log($scope.dataFrom.repeatSelectFrom + " " + $scope.date.toISOString() + " " + $scope.passengers);
                             if (response.data[0] == undefined) {
                                 $scope.feedBack = "No Flight is found";
                                 $scope.airlines = response.data;
@@ -96,7 +122,7 @@ angular.module('myApp.view1', ['ngRoute'])
                                     + $scope.passengers
 
                         }).then(function successCallback(response) {
-                        console.log($scope.dataFrom.repeatSelectFrom+ " " +$scope.dataTo.repeatSelectTo  + " " + $scope.date.toISOString() + " " + $scope.passengers); 
+                            console.log($scope.dataFrom.repeatSelectFrom + " " + $scope.dataTo.repeatSelectTo + " " + $scope.date.toISOString() + " " + $scope.passengers);
                             if (response.data[0] == undefined) {
                                 $scope.feedBack = "No Flight is found";
                                 $scope.airlines = response.data;

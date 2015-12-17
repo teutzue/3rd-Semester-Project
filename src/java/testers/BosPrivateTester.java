@@ -6,7 +6,6 @@
 package testers;
 
 import entity.Booking;
-import static entity.Booking_.user;
 import entity.Passenger;
 import entity.User;
 import facades.ReservationsFacade;

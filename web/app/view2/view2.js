@@ -10,13 +10,19 @@ angular.module('myApp.view2', ['ngRoute'])
 
         .controller('View2Ctrl', function ($http, $scope, $rootScope) {
             
+            $scope.showSpinner = true;
+            
             $http({
                 method: 'GET',
                 url: 'api/reservations' + '/' + $rootScope.theUsername
             }).then(function successCallback(response) {
+                
+                $scope.showSpinner = false;
                 $scope.data = response.data;
                 
             }, function errorCallback(res) {
+                
+                $scope.showSpinner = false;
                 $scope.error = res.status + ": " + res.data.statusText;
             });
 

@@ -3,99 +3,229 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My AngularJS App</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">   
-    <link rel="stylesheet" href="app/app.css">
-    <link href="app/view1/spinner.css" rel="stylesheet" type="text/css"/>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>JTB :: Air Service</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">   
+        <link rel="stylesheet" href="app/app.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-    <script src="app/bower_components/angular/angular.js"></script>
-    <script src="app/bower_components/angular-route/angular-route.js"></script>
-    <script src='app/bower_components/angular-animate/angular-animate.min.js'></script>
-    <script src="app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="app/app.js"></script>
-    <script src="app/view1/view1.js"></script>
-    <script src="app/view2/view2.js"></script>
-    <script src="app/view3/view3.js"></script>
-    <script src="app/view4/view4.js"></script>
-    <script src="app/view5_create_new_account/view5_create_new_account.js" type="text/javascript"></script>
-    <script src="app/view6_create_passengers/view6_create_passengers.js" type="text/javascript"></script>
-    <script src="app/view7/view7.js" type="text/javascript"></script>
-    <script src="app/components/authentication.js"></script>
-    <script src="app/components/filters.js"></script>
-    <script src="app/components/directives.js"></script>
-    <script src="app/components/factories.js"></script>
-    <script src="app/components/services.js"></script>
-    
-    
-    
-  </head>
-  <body ng-app="myApp" background ="air.jpg">
-      <!--<img src="..WEB-INF/image/22965.jpg"  >-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>-->
+        <script src="app/bower_components/angular/angular.js"></script>
+        <script src="app/bower_components/angular-route/angular-route.js"></script>
+        <script src='app/bower_components/angular-animate/angular-animate.min.js'></script>
+        <script src="app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/view1/view1.js"></script>
+        <script src="app/view2/view2.js"></script>
+        <script src="app/view3/view3.js"></script>
+        <script src="app/view4/view4.js"></script>
+        <script src="app/view5_create_new_account/view5_create_new_account.js" type="text/javascript"></script>
+        <script src="app/view6_create_passengers/view6_create_passengers.js" type="text/javascript"></script>
+        <script src="app/view7/view7.js" type="text/javascript"></script>
+        <script src="app/components/authentication.js"></script>
+        <script src="app/components/filters.js"></script>
+        <script src="app/components/directives.js"></script>
+        <script src="app/components/factories.js"></script>
+        <script src="app/components/services.js"></script>
 
-    <div class="container"  >
-      <nav class="navbar navbar-fixed-top " role="navigation" ng-controller="AppLoginCtrl">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">{{title}}</a>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#/view1">Home</a></li>
-              <li><a href="#/view2">Page for Users</a></li>
-              <li><a href="#/view3">Page for Admins</a></li>
-              <li><a href="#/view4">Using the Seed</a></li>
-              <li><a href="#/view5_create_new_account">Sign Up</a></li>
-              <li><a href="#/view6_create_passengers">Sign up passengers</a></li>
-               <li><a href="#/view7">User Books</a></li>
-            </ul>
-            <div>
-            <form class="navbar-form navbar-right" role="form" ng-show="!isAuthenticated" ng-submit="login()"  >
-              <div class="form-group">
-                <input type="text" style="width:10em;" placeholder="User name" class="form-control"
-                       ng-model="user.username">
-              </div>
-              <div class="form-group">
-                <input type="password" style="width:10em;" placeholder="Password" class="form-control"
-                       ng-model="user.password">
-              </div>
-              <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
-            <div class="navbar-right" ng-show="isAuthenticated">
-              
-              <p class="navbar-text">Logged on as: {{username}}</p>
+        <!-- Added by Bo Vilstrup -->
+        <link href="app/_css/spinner.css" rel="stylesheet" type="text/css"/>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.js"></script>-->
+        <!-- End of Added by Bo Vilstrup -->
 
-              <button type="submit" class="btn btn-primary navbar-btn"  ng-click="logout()">Logout
-              </button>
+
+    </head>
+    <body>
+
+        <div>
+            <!--<div class="container" >-->
+            <header role="banner">
+                <nav  class="navbar navbar-fixed-top navbar-default navbar-inverse navbar-static-top" role="navigation" ng-controller="AppLoginCtrl">
+                    <!--<nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation" ng-controller="AppLoginCtrl">-->
+                    <div class="container-fluid" >
+                        <div class="navbar-header" >
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!--<a class="navbar-brand" href="#">{{title}}</a>-->
+                            <a class="navbar-brand active"  href="#/view1">JTB <span class="glyphicon glyphicon-globe fa-lg"></span> Air Service</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                            <li><a></a></li>
+                            <li><a></a></li>
+                            <li><a></a></li>
+                            <li><a href="#/view1">Search</a></li>
+                            <li><a href="#/view2" ng-show="isUser">Your Bookings</a></li>
+                            <li><a href="#/view3" ng-show="isAdmin">See All Bookings</a></li>
+                            <!--<li><a href="#/view4">Using the Seed</a></li>-->
+                            <li><a href="#/view5_create_new_account">Sign Up</a></li>
+                            <li><a href="#/view6_create_passengers">Sign up passengers</a></li>
+                            <li><a href="#/view7" ng-show="isUser">User Books</a></li>
+                        </ul>
+
+                        <div>
+                            <form class="navbar-form navbar-right" role="form" ng-show="!isAuthenticated" ng-submit="login()">
+                                <div class="form-group">
+                                    <input type="text" style="width:10em;" placeholder="User name" class="form-control input-sm" ng-model="user.username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" style="width:10em;" placeholder="Password" class="form-control input-sm" ng-model="user.password">
+                                </div>
+                                <!--<button type="submit" class="btn btn-success">Sign in</button>-->
+                                <button type="submit" class="btn btn-primary btn-sm">Sign in</button>
+                            </form>
+                            <div class="navbar-right" ng-show="isAuthenticated">
+                                <p class="navbar-text">Logged on as: {{username}}</p>
+                                <button type="submit" class="btn btn-primary navbar-btn btn-sm"  ng-click="logout()">Logout</button>
+                            </div>
+                        </div>
+
+                    </div><!-- class container-fluid -->
+
+
+                </nav>
+            </header>
+
+
+            <!--            <nav class="navbar navbar-fixed-top" role="navigation" ng-controller="AppLoginCtrl">
+                            <div class="container">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="#">{{title}}</a>
+                                </div>
+                                <div id="navbar" class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="#/view1">Search</a></li>
+                                        <li><a href="#/view2">Your Bookings</a></li>
+                                        <li><a href="#/view3">See All Bookings</a></li>
+                                        <li><a href="#/view4">Using the Seed</a></li>
+                                        <li><a href="#/view5_create_new_account">Sign Up</a></li>
+                                        <li><a href="#/view6_create_passengers">Sign up passengers</a></li>
+                                        <li><a href="#/view7">User Books</a></li>
+                                    </ul>
+                                    <div>
+                                        <form class="navbar-form navbar-right" role="form" ng-show="!isAuthenticated" ng-submit="login()"  >
+                                            <div class="form-group">
+                                                <input type="text" style="width:10em;" placeholder="User name" class="form-control"
+                                                       ng-model="user.username">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" style="width:10em;" placeholder="Password" class="form-control"
+                                                       ng-model="user.password">
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Sign in</button>
+                                        </form>
+                                        <div class="navbar-right" ng-show="isAuthenticated">
+            
+                                            <p class="navbar-text">Logged on as: {{username}}</p>
+            
+                                            <button type="submit" class="btn btn-primary navbar-btn"  ng-click="logout()">Logout
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>-->
+
+            <!--<div class="container">-->
+            <div class="container-fluid">
+                <div class="row">
+                    <!--<div style="margin-top: 20px;">-->
+                    <div style="margin-top: 20px;" >
+                        <!--<hr style="background: lightblue; border:0; height:7px" />-->
+                        <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+                        <div ng-view></div>
+                    </div>
+                </div>
             </div>
-            </div>
-          </div>
         </div>
-      </nav>
-     
-      <div class="container">
-        <div style="margin-top: 60px;">
-          <hr style="background: lightblue; border:0; height:7px" />
-          <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
-          <div ng-view></div>
-        </div>
-      </div>
-    </div>
+        <div class="container-fluid">
+            <div class="row" style="padding-top: -10px;margin-top: -10px;border-top: -10px;">
+                <footer style="color: #CCCCCC;text-align: justify">
 
-   
-  
-  </body>
+                    <div class="col-md-3" style="background-color: #333;background-color: #333; min-height: 460px">
+
+                        <br /><br />
+                        <h3 Style="color: cornflowerblue">Disclaimer</h3>
+                        <p>
+                            This assignment is part of a larger school project that involves both backend and frontend technologies. As
+                            part of the assignment students are asked to outsource part of the work to be paid for and produced by
+                            freelancers. The final product is not a commercial product and will never be used in production.
+                        </p>
+                        <p>
+                            The purpose is for our students to get experience with the process of writing requirement specifications
+                            and communicate these efficiently to developers. The project is not approved before all the agreed upon
+                            work has been paid for in full.
+                        </p>
+                        <p>
+                            If you need to contact the academy please email either of the following addresses: 
+                        </p>
+                        <ul>
+                            <li>Lars Mortensen: <a>lam@cphbusiness.dk</a></li>
+                            <li>Sofus Albertsen: <a>sal@cphbusiness.dk</a></li>
+                            <li>Thomas Hartmann: <a>tha@cphbusiness.dk</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3" style="background-color: #111; min-height: 460px">
+
+                        <br /><br />
+                        <h3 style="color: goldenrod;">JTB Global Air Service</h3><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i style="font-size: 300px;text-align: left" class="glyphicon glyphicon-globe"></i>
+
+                    </div>
+
+                    <div class="col-md-3" style="background-color: #333; min-height: 460px">
+
+                        <br /><br />
+                        <h3 Style="color: cornflowerblue">Airlines and More</h3>
+                        <dl>
+                            <dt>AngularJS Airways<dt>
+                            <dd>The API supplies test flights from Copenhagen to several European cities for 2016</dd>
+                            <dd>More info here: <a>http://angularairline-plaul.rhcloud.com</a></dd>
+                        </dl>
+                        <dl>
+                            <dt>How to get help</dt>
+                            <dd>All questions must be stated on our Q and A site:</dd> 
+                            <dd><a>http://qa-salcphbusiness.rhcloud.com/</a></dd>
+                        </dl>
+                        
+                        
+                    </div>
+
+                    <div class="col-md-3" style="background-color: #111; min-height: 460px">
+
+                        <br /><br />
+                        <h3 style="color: goldenrod;">CPH Bussiness School</h3>
+                        <img src="app/_img/cph.png">
+                        
+                    </div>
+                    
+                    <div style="padding-bottom: 1em"></div>
+                    
+                    <div class="col-md-6" style="background-color: cornflowerblue; min-height: 460px"></div>
+                    <div class="col-md-6" style="background-color: royalblue; min-height: 460px"></div>
+
+                </footer> 
+            </div>
+        </div>
+
+
+
+    </body>
 </html>
