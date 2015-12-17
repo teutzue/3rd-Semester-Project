@@ -10,6 +10,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Booking;
 import entity.Passenger;
+import entity.SearchRequest;
+import facades.SearchRequestFacade;
 import facades.UrlFacade;
 import facades.UserFacade;
 import java.io.IOException;
@@ -65,9 +67,7 @@ public class FlightinfoResource {
             @PathParam("date") String date,
             @PathParam("numTickets") int passengernumber
     ) throws InterruptedException, ExecutionException, JSONException {
-
-     
-        
+        SearchRequestFacade src = new SearchRequestFacade();
         UrlFacade cus = new UrlFacade(Persistence.createEntityManagerFactory("PU-Local"));
       List<String> newturl = new  ArrayList<>();
       List<String> listurl = cus.getAllUrl();
@@ -78,6 +78,14 @@ public class FlightinfoResource {
             newturl.add(url);
         }
         data.addUrls(newturl);
+        
+        SearchRequest sr = new SearchRequest();
+        
+        sr.setTo(to);
+        sr.setFrom(from);
+        sr.setDate(date);
+        sr.setNoPassengers(Integer.toString(passengernumber));
+        src.addSearchRequest(sr);
         
         Gson gson = new Gson();
         List<JSONObject> list = data.returnJsonStringAirlineInfo(10);

@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Booking;
 import entity.Passenger;
+import entity.SearchRequest;
 import entity.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,17 @@ import java.util.List;
 public class JsonConverter {
 
     private static Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create();
+
+    private static JsonObject searches2JsonObj(entity.SearchRequest sr) {
+        JsonObject joSearch = new JsonObject();
+
+        joSearch.addProperty(Properties.SEARCH_REQUEST_FROM, sr.getFrom());
+        joSearch.addProperty(Properties.SEARCH_REQUEST_TO, sr.getTo());
+        joSearch.addProperty(Properties.SEARCH_REQUEST_Date, sr.getDate());
+        joSearch.addProperty(Properties.SEARCH_REQUEST_NO_Passengers, sr.getNoPassengers());
+
+        return joSearch;
+    }
 
     // person -> json ..........................................................
     private static JsonObject user2JsonObj(entity.User user) {
@@ -89,10 +101,20 @@ public class JsonConverter {
 
         JsonArray jaUsers = new JsonArray();
         for (User user : users) {
-            
-            jaUsers.add( user2JsonObj(user) ); 
+
+            jaUsers.add(user2JsonObj(user));
         }
         return jaUsers.toString();
     } // End of users2Json
+
+    //Search
+    public static String serches2Json(List<entity.SearchRequest> searches) {
+
+        JsonArray jaUsers = new JsonArray();
+        for (SearchRequest sr : searches) {
+            jaUsers.add(searches2JsonObj(sr));
+        }
+        return jaUsers.toString();
+    }
 
 } // End of Class

@@ -30,12 +30,12 @@ public class SearchRequestFacade {
         return searchReq;
     }
 
-    public List<String> getAllSearchRequests() {
+    public List<entity.SearchRequest> getAllSearchRequests() {
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("Select c FROM SearchRequest c");
         
-        List<String> results = null;
+        List<entity.SearchRequest> results = null;
         try {
             results = query.getResultList();
         } catch (Exception e) {
